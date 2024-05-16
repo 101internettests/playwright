@@ -1,8 +1,8 @@
 from playwright.sync_api import Page, expect
 
 
-# Тест на проверку наличия всех элементов на странице
-def test_first(page: Page):
+# Тест на проверку наличия всех элементов на первой странице
+def test_mani_page(page: Page):
     page.goto('https://101internet.ru/abakan')
     expect(page.locator('//div[@id="HeaderMenu"]')).to_be_visible()
     expect(page.locator('(// a[@ aria-label="call"])[1]')).to_contain_text('БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ')
@@ -36,3 +36,49 @@ def test_first(page: Page):
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
     expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
     expect(page.get_by_role('link', name='yan-dzen'))
+
+
+def test_tohome(page: Page):
+    page.goto('https://101internet.ru/abakan/orders/tohome')
+    expect(page.locator('(//a[@aria-label="/abakan"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Абакан")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "поиск по адресу")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Провайдеры интернета по адресу в Абакане")]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "показать тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//h2)[4]')).to_be_visible()
+    expect(page.locator('//ul[@style]')).to_be_visible()
+    expect(page.locator('(//h2)[5]')).to_be_visible()
+    expect(page.locator('//div[@data-test="countRates"]')).to_be_visible()
+    expect(page.locator('(//h2)[6]')).to_be_visible()
+    expect(page.locator('(//p[@align="left"])[1]')).to_be_visible()
+    expect(page.locator('(//p[@align="left"])[2]')).to_be_visible()
+    expect(page.locator('//ol[@align="left"]')).to_be_visible()
+    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
+    expect(page.locator('(//h2)[7]')).to_be_visible()
+    expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
+    expect(page.locator('(//h2)[1]')).to_be_visible()
+    expect(page.locator('(//h2)[2]')).to_be_visible()
+    expect(page.locator('(//div[@itemscope])[1]')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+
+
+def test_providers(page: Page):
+    page.goto('https://101internet.ru/abakan/providers')
+    expect(page.locator('(//a[@aria-label="/abakan"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Абакан")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
