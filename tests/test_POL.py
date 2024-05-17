@@ -105,3 +105,32 @@ def test_providers(page: Page):
     expect(page.get_by_role('link', name='yan-dzen'))
     for i in range(1, 6):
         expect(page.locator(f'(//a[@aria-label="Переключить страницу"])[{i}]')).to_be_visible()
+
+
+def test_rating(page: Page):
+    page.goto('https://piter-online.net/rating')
+    expect(page.locator('(//a[@aria-label="/"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Санкт-Петербург")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Рейтинг провайдеров")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Период")]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Интернет")])[1]')).to_be_visible()
+    expect(page.locator('//input[@datatest="raiting_input_filter_period"]')).to_be_visible()
+    expect(page.locator('//input[@datatest="raiting_input_filter_internet_type"]')).to_be_visible()
+    for i in range(1, 7):
+        expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
+    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
+    expect(page.locator('//h2')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "© 2008-2024 «Питер Онлайн» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «Питер Онлайн» — поиск провайдеров по адресу')
+    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
+    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
+    expect(page.get_by_role('link', name='yan-dzen'))
+    for i in range(1, 17):
+        expect(page.locator(f'(//*[@id="root"]/div/div[1]/div[5]/div[3]/div[3]/div)[{i}]')).to_be_visible()
