@@ -107,6 +107,42 @@ def test_providers_lenoblst(page: Page):
     expect(page.get_by_role('link', name='yan-dzen'))
 
 
+def test_providers_lenoblst_second(page: Page):
+    page.goto('https://piter-online.net/leningradskaya-oblast/providers/2')
+    expect(page.locator('(//a[@aria-label="/leningradskaya-oblast"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Ленинградская область")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Провайдеры Ленинградской области")]')).to_be_visible()
+    expect(page.locator('(//h2)[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
+    expect(page.locator('(//h2)[3]')).to_be_visible()
+    expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Тип интернета")]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Провайдер")])[2]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@datatest="providers_input_filter_internet_type"]')).to_be_visible()
+    expect(page.locator('//input[@datatest="providers_provider_input_filter"]')).to_be_visible()
+    expect(page.locator('//input[@datatest="providers_change_sort_providers"]')).to_be_visible()
+    for i in range(1, 35):
+        expect(page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]')).to_be_visible()
+    expect(page.locator('(//h2)[6]')).to_be_visible()
+    expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "© 2008-2024 «Питер Онлайн» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «Питер Онлайн» — поиск провайдеров по адресу')
+    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
+    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
+    expect(page.get_by_role('link', name='yan-dzen'))
+
+
 def test_rating_lenoblst(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast/rating')
     expect(page.locator('(//a[@aria-label="/leningradskaya-oblast"])[2]')).to_be_visible()
