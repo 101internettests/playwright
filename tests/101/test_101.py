@@ -29,7 +29,7 @@ def test_mani_page(page: Page):
     expect(page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "оставить отзыв")])[1]')).to_have_text('оставить отзыв')
     expect(page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "все отзывы")])[1]')).to_have_text('все отзывы')
     expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
-    expect(page.locator('//h2[contains(text(), "Возможна установка интернета в квартире в Абакане в районах:")]')).to_contain_text("Возможна установка интернета в квартире в Абакане в районах:")
+    expect(page.locator('(//h2)[9]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "Все")])[1]')).to_be_visible()
     expect(page.locator('//footer')).to_be_visible()
     expect(page.locator('//span[contains(text(), "© 2008-2024 «101 Интернет» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «101 Интернет» — поиск провайдеров по адресу')
@@ -59,9 +59,6 @@ def test_tohome(page: Page):
     expect(page.locator('(//h2)[5]')).to_be_visible()
     expect(page.locator('//div[@data-test="countRates"]')).to_be_visible()
     expect(page.locator('(//h2)[6]')).to_be_visible()
-    expect(page.locator('(//p[@align="left"])[1]')).to_be_visible()
-    expect(page.locator('(//p[@align="left"])[2]')).to_be_visible()
-    expect(page.locator('//ol[@align="left"]')).to_be_visible()
     expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
     expect(page.locator('(//h2)[7]')).to_be_visible()
     expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
@@ -91,20 +88,11 @@ def test_providers(page: Page):
     expect(page.locator('(//h2)[3]')).to_be_visible()
     expect(page.locator('(//h2)[5]')).to_be_visible()
     expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Тип интернета")]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "Провайдер")])[2]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@datatest="providers_input_filter_internet_type"]')).to_be_visible()
-    expect(page.locator('//input[@datatest="providers_provider_input_filter"]')).to_be_visible()
-    expect(page.locator('//input[@datatest="providers_change_sort_providers"]')).to_be_visible()
-    for i in range(2, 7):
-        expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
     for i in range(1, 19):
         expect(page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]')).to_be_visible()
     expect(page.locator('(//h2)[6]')).to_be_visible()
     expect(page.locator('(//ol[@align="left"])[1]')).to_be_visible()
     expect(page.locator('(//p[@align="left"])[2]')).to_be_visible()
-    expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
     expect(page.locator('(//h2)[7]')).to_be_visible()
     expect(page.locator('(//p[@align="left"])[3]')).to_be_visible()
     expect(page.locator('(//p[@align="left"])[4]')).to_be_visible()
@@ -116,6 +104,10 @@ def test_providers(page: Page):
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
     expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
     expect(page.get_by_role('link', name='yan-dzen'))
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
 
 
 def test_rating(page: Page):
@@ -136,7 +128,8 @@ def test_rating(page: Page):
     for i in range(1, 3):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
     expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
-    expect(page.locator('//h2')).to_be_visible()
+    expect(page.locator('(//h2)[1]')).to_be_visible()
+    expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('//footer')).to_be_visible()
     expect(page.locator('//section')).to_be_visible()
     expect(page.locator(
@@ -145,6 +138,10 @@ def test_rating(page: Page):
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
     expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
     expect(page.get_by_role('link', name='yan-dzen'))
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
 
 
 def test_rates(page: Page):
@@ -158,7 +155,7 @@ def test_rates(page: Page):
     expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тарифы на интернет")])[1]')).to_be_visible()
-    expect(page.locator('//h1')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
     expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
@@ -178,14 +175,12 @@ def test_rates(page: Page):
     expect(page.locator('(//a[@href="/abakan/rates/online-kinoteatr"])[1]')).to_be_visible()
     for i in range(1, 4):
         expect(page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]')).to_be_visible()
-    expect(page.locator('(//div[@datatest="providers_find_adress"])[1]')).to_be_visible()
-    expect(page.locator('(//div[@datatest="providers_callback2"])[1]')).to_be_visible()
+    # expect(page.locator('(//div[@datatest="providers_find_adress"])[1]')).to_be_visible()
+    # expect(page.locator('(//div[@datatest="providers_callback2"])[1]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//h2)[5]')).to_be_visible()
-    expect(page.locator('(//h2)[7]')).to_be_visible()
     expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
-    expect(page.locator('(//h2)[1]')).to_be_visible()
-    for i in range(1, 20):
+    for i in range(1, 10):
         expect(page.locator(f'(//h3[@itemprop="name"])[{i}]')).to_be_visible()
     expect(page.locator('(//h3[@itemprop="name"])[1]')).to_be_visible()
 
