@@ -1,8 +1,7 @@
 from playwright.sync_api import Page, expect
 
 
-# Тест на проверку наличия всех элементов на первой странице
-def test_mani_page(page: Page):
+def test_main_page(page: Page):
     page.goto('https://101internet.ru/abakan')
     expect(page.locator('//div[@id="HeaderMenu"]')).to_be_visible()
     expect(page.locator('(// a[@ aria-label="call"])[1]')).to_contain_text('БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ')
@@ -183,4 +182,5 @@ def test_rates(page: Page):
     for i in range(1, 10):
         expect(page.locator(f'(//h3[@itemprop="name"])[{i}]')).to_be_visible()
     expect(page.locator('(//h3[@itemprop="name"])[1]')).to_be_visible()
+
 

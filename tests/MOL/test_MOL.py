@@ -112,6 +112,42 @@ def test_providers(page: Page):
     expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
 
 
+def test_providers_2(page: Page):
+    page.goto('https://www.moskvaonline.ru/providers/2')
+    expect(page.locator('(//a[@aria-label="/"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Москва")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Провайдеры Москвы")]')).to_be_visible()
+    expect(page.locator('(//h2)[3]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
+    expect(page.locator('(//h2)[4]')).to_be_visible()
+    expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
+    for i in range(1, 19):
+        expect(page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[@datatest="providers_find_adress"])[1]')).to_be_visible()
+    expect(page.locator('(//div[@datatest="providers_find_adress"])[2]')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу')
+    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
+    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
+    expect(page.get_by_role('link', name='yan-dzen'))
+    for i in range(1, 6):
+        expect(page.locator(f'(//a[@aria-label="Переключить страницу"])[{i}]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
+
+
 def test_rating(page: Page):
     page.goto('https://www.moskvaonline.ru/rating')
     expect(page.locator('(//a[@aria-label="/"])[2]')).to_be_visible()
@@ -179,3 +215,15 @@ def test_rates(page: Page):
     for i in range(1, 18):
         expect(page.locator(f'(//h3[@itemprop="name"])[{i}]')).to_be_visible()
     expect(page.locator('(//h3[@itemprop="name"])[1]')).to_be_visible()
+
+
+def test_select_region(page: Page):
+    page.goto('https://www.moskvaonline.ru/select-region')
+    expect(page.locator('//span[contains(text(), "Выберите город или регион")]')).to_be_visible()
+    expect(page.locator('//input[@placeholder="Введите первые 3 буквы"]')).to_be_visible()
+    for i in range(1, 34):
+        expect(page.locator(f'(//a[@datatest="main_region_choose"][@href])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//*[@id="root"]/div/div[1]/div/div/div/div/div[3]/div)[{i}]')).to_be_visible()
+    expect(page.locator('//div[@class="components__slider-button"]')).to_be_visible()
+    expect(page.locator('(//span[@class="icon24 icon-close"])[1]')).to_be_visible()
