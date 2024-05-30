@@ -10,7 +10,7 @@ def test_first_bal(page: Page):
     expect(page.locator('(// a[@ aria-label="call"])[1]')).to_contain_text('БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ')
     expect(page.locator('(// div[@ datatest="main_button_enter"])[1]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Подключить домашний интернет в Балашихе")]')).to_contain_text('Подключить домашний интернет в Балашихе')
-    expect(page.locator('(//div[contains(text(), "Введите ваш адрес, сравните тарифы провайдеров домашнего интернета в Москве и области и подключите интернет с гарантией до 90 дней и кэшбэком до 1000 рублей!")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Введите ваш адрес и сравните тарифы провайдеров Балашихи. Гарантия до 90 дней и кэшбэк до 1000 рублей!")])[1]')).to_be_visible()
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[1]')).to_be_visible()
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[2]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
@@ -30,7 +30,7 @@ def test_first_bal(page: Page):
     expect(page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "оставить отзыв")])[1]')).to_have_text('оставить отзыв')
     expect(page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "все отзывы")])[1]')).to_have_text('все отзывы')
     expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
-    expect(page.locator('//h2[contains(text(), "Подключить интернет для дома в районах Балашихи")]')).to_contain_text('Подключить интернет для дома в районах Балашихи')
+    expect(page.locator('(//h2)[9]')).to_be_visible()
     expect(page.locator('//footer')).to_be_visible()
     expect(page.locator('//span[contains(text(), "© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу')
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
@@ -538,6 +538,143 @@ def test_online_kinoteatr(page: Page):
     expect(page.locator('//footer')).to_be_visible()
     expect(page.locator('//section')).to_be_visible()
     expect(page.locator('//span[contains(text(), "© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу')
+    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
+    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
+    expect(page.get_by_role('link', name='yan-dzen'))
+
+
+def test_reviews(page: Page):
+    page.goto('https://www.moskvaonline.ru/balashiha/reviews')
+    expect(page.locator('(//a[@aria-label="/balashiha"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Балашиха")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Подключить интернет")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Подключить интернет")]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    expect(page.locator('(//div[@id="OneClickForm"])[1]')).to_be_visible()
+    expect(page.locator('(//img[@alt="Фото формы в один клик"])[1]')).to_be_visible()
+    expect(page.locator('(//div[@data-test="waitingCall_button"])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Провайдер")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Отзыв")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "УСЛУГА")])[1]')).to_be_visible()
+    expect(page.locator('(//input[@name="change_providers"])[1]')).to_be_visible()
+    expect(page.locator('(//input[@name="change_review"])[1]')).to_be_visible()
+    expect(page.locator('(//input[@name="change_services"])[1]')).to_be_visible()
+    expect(page.locator('(//a[@datatest="main_allreviews_button"])[2]')).to_be_visible()
+    expect(page.locator('(//input[@value="Сначала новые отзывы "])[1]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//div[@itemprop="review"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//div[@itemprop="reviewRating"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//div[@itemprop="reviewBody description"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//textarea[@aria-labelledby="label"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//button[@datatest="review_comment_send"])[{i}]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//span[contains(text(), "Отзыв засчитан")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[@aria-label="call"])[1]')).to_be_visible()
+    expect(page.locator('(//div[@class="container"]//div[@class="row"])[5]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//a[@aria-label="Переключить страницу"])[{i}]')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу")]')).to_contain_text(
+        '© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу')
+    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
+    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
+    expect(page.get_by_role('link', name='yan-dzen'))
+
+
+def test_reviews2(page: Page):
+    page.goto('https://www.moskvaonline.ru/balashiha/reviews/2')
+    expect(page.locator('(//a[@aria-label="/balashiha"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Балашиха")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Подключить интернет")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Подключить интернет")]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    expect(page.locator('(//div[@id="OneClickForm"])[1]')).to_be_visible()
+    expect(page.locator('(//img[@alt="Фото формы в один клик"])[1]')).to_be_visible()
+    expect(page.locator('(//div[@data-test="waitingCall_button"])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Провайдер")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Отзыв")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "УСЛУГА")])[1]')).to_be_visible()
+    expect(page.locator('(//input[@name="change_providers"])[1]')).to_be_visible()
+    expect(page.locator('(//input[@name="change_review"])[1]')).to_be_visible()
+    expect(page.locator('(//input[@name="change_services"])[1]')).to_be_visible()
+    expect(page.locator('(//a[@datatest="main_allreviews_button"])[2]')).to_be_visible()
+    expect(page.locator('(//input[@value="Сначала новые отзывы "])[1]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//div[@itemprop="review"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//div[@itemprop="reviewRating"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//div[@itemprop="reviewBody description"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//textarea[@aria-labelledby="label"])[{i}]')).to_be_visible()
+    for i in range(1, 20):
+        expect(page.locator(f'(//button[@datatest="review_comment_send"])[{i}]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//span[contains(text(), "Отзыв засчитан")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[@aria-label="call"])[1]')).to_be_visible()
+    expect(page.locator('(//div[@class="container"]//div[@class="row"])[5]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//a[@aria-label="Переключить страницу"])[{i}]')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу")]')).to_contain_text(
+        '© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу')
+    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
+    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
+    expect(page.get_by_role('link', name='yan-dzen'))
+
+
+def test_address(page: Page):
+    page.goto('https://www.moskvaonline.ru/balashiha/address')
+    expect(page.locator('(//a[@aria-label="/balashiha"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Балашиха")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Подключить интернет")]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Карта покрытия")])[1]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "показать тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//h2)[3]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Введите ваш адрес и сравните всех провайдеров своего дома в одной удобной таблице.") ])[1]')).to_be_visible()
+    expect(page.locator('(//h2)[5]')).to_be_visible()
+    for i in range(1, 19):
+        expect(page.locator(f'(//a[@datatest="top_provider_block"])[{i}]')).to_be_visible()
+    expect(page.locator('(//h2)[6]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Б")])[4]')).to_be_visible()
+    expect(page.locator('(//h2)[1]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//h3)[{i}]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//p)[{i}]')).to_be_visible()
+    expect(page.locator('(//h2)[2]')).to_be_visible()
+    expect(page.locator('//footer')).to_be_visible()
+    expect(page.locator('//section')).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу")]')).to_contain_text(
+        '© 2008-2024 «Москва Онлайн» — поиск провайдеров по адресу')
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
     expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
     expect(page.get_by_role('link', name='yan-dzen'))
