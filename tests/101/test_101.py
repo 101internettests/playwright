@@ -12,7 +12,7 @@ def test_main_page(page: Page):
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[1]')).to_be_visible()
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[2]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(// div[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
+    expect(page.locator('(//button[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
     expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
     expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
     expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')
@@ -52,7 +52,7 @@ def test_tohome(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "показать тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//button[contains(text(), "показать тарифы")])[1]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('//ul[@style]')).to_be_visible()
     expect(page.locator('(//h2)[5]')).to_be_visible()
@@ -83,7 +83,7 @@ def test_providers(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
+    expect(page.locator('(//button[contains(text(), "найти")])[1]')).to_be_visible()
     expect(page.locator('(//h2)[3]')).to_be_visible()
     expect(page.locator('(//h2)[5]')).to_be_visible()
     expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
@@ -106,7 +106,7 @@ def test_providers(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
+    expect(page.locator('(//button[contains(text(), "найти")])[1]')).to_be_visible()
 
 
 def test_rating(page: Page):
@@ -140,7 +140,7 @@ def test_rating(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
+    expect(page.locator('(//button[contains(text(), "найти")])[1]')).to_be_visible()
 
 
 def test_rates(page: Page):
@@ -159,7 +159,7 @@ def test_rates(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "показать тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//button[contains(text(), "показать тарифы")])[1]')).to_be_visible()
     expect(page.locator('(//h2)[3]')).to_be_visible()
     expect(page.locator('(//p[@align="left"])[1]')).to_be_visible()
     expect(page.locator('(//a[@aria-current="page"])[4]')).to_be_visible()

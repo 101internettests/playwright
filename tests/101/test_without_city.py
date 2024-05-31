@@ -26,7 +26,7 @@ def test_without_city_main(page: Page):
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[1]')).to_be_visible()
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[2]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(// div[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
+    expect(page.locator('(//button[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
     expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
     expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
     expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')
