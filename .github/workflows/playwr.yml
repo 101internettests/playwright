@@ -31,7 +31,7 @@ jobs:
 
       - name: tests
         # if: "github.event.inputs.deployment_target == 'all'"
-        run: pytest tests/101 tests/MOL tests/POL  --alluredir=allure-results
+        run: pytest tests/101 tests/MOL tests/POL  --browser webkit --browser firefox
         continue-on-error: true
 
       - name: Install Java
