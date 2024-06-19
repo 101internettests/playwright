@@ -323,3 +323,4 @@ def test_internet_tv_mobile(page: Page):
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
     expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
     expect(page.get_by_role('link', name='yan-dzen'))
+    expect(page.locator('//footer')).not_to_be_visible()
