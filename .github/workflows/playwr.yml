@@ -1,10 +1,7 @@
-name: 3 tests
-
 on:
-#  schedule:
-#    - cron: "15 3 * * *"
+  schedule:
+    - cron: '0 23 * * 1-5'
   workflow_dispatch:
-
 
 permissions:
   contents: read
@@ -12,30 +9,25 @@ permissions:
   id-token: write
 
 jobs:
-  run-tests:
+  run-playwright-tests:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-    name: Run autotests
+    defaults:
+      run:
+         working-directory: ./tests/web-application
     steps:
-      - name: Download repository
-        uses: actions/checkout@v4
-      - name: Set up Python environment
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          python-version: "3.10"
-
-      - name: install dependencies
-        run: pip install -r requirements.txt
-             pip install pytest
-#      - name: Download all workflow run artifacts
-#        uses: actions/download-artifact@v4.1.4
-
-      - name: tests
-        # if: "github.event.inputs.deployment_target == 'all'"
-        run:  pytest tests
-        continue-on-error: true
-
-      - name: Install Java
-        uses: actions/setup-java@v4
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
         with:
-          distribution: 'microsoft'
-          java-version: '17'
+          name: playwright-report
+          path: tests/web-application/playwright-report
