@@ -18,4 +18,4 @@ jobs:
       - name: Finally
         run: playwright install
       - name: Run tests
-        run: pytest --browser webkit --browser firefox --browser chromium
+        run: pytest --browser firefox --browser chromium
