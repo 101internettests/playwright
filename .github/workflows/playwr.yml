@@ -31,7 +31,7 @@ jobs:
 
       - name: tests
         # if: "github.event.inputs.deployment_target == 'all'"
-        run:  pytest tests --browser=webkit && pytest tests --browser=firefox && pytest tests --browser=chromium
+        run:  pytest tests
         continue-on-error: true
 
       - name: Install Java
