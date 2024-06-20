@@ -15,5 +15,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Others
         run: pip install pytest-playwright
+      - name: Finally
+        run: playwright install
       - name: Run tests
         run: pytest
