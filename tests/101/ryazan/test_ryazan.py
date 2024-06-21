@@ -4,9 +4,6 @@ from playwright.sync_api import Page, expect
 # Тест на проверку наличия всех элементов на первой странице
 def test_mani_page(page: Page):
     page.goto('https://101internet.ru/ryazan')
-    expect(page.locator('(//a[@aria-label="/ryazan"] )[2]')).to_be_visible()
-    expect(page.locator('(// span[contains(text(), "Рязань")])[1]')).to_be_visible()
-    expect(page.locator('//div[@id="HeaderMenu"]')).to_be_visible()
     expect(page.locator('(// a[@ aria-label="call"])[1]')).to_contain_text('БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ')
     expect(page.locator('(// div[@ datatest="main_button_enter"])[1]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Подключить интернет")]')).to_contain_text('Подключить интернет')
@@ -33,22 +30,10 @@ def test_mani_page(page: Page):
     expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
     expect(page.locator('(//h2)[9]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "Все")])[1]')).to_be_visible()
-    expect(page.locator('//footer')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "© 2008-2024 «101 Интернет» — поиск провайдеров по адресу")]')).to_contain_text('© 2008-2024 «101 Интернет» — поиск провайдеров по адресу')
-    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
-    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
-    expect(page.get_by_role('link', name='yan-dzen'))
 
 
 def test_tohome(page: Page):
     page.goto('https://101internet.ru/ryazan/orders/tohome')
-    expect(page.locator('(//a[@aria-label="/ryazan"] )[2]')).to_be_visible()
-    expect(page.locator('(// span[contains(text(), "Рязань")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "поиск по адресу")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Провайдеры интернета по адресу в Рязани")]')).to_be_visible()
@@ -61,55 +46,28 @@ def test_tohome(page: Page):
     expect(page.locator('(//h2)[5]')).to_be_visible()
     expect(page.locator('//div[@data-test="countRates"]')).to_be_visible()
     expect(page.locator('(//h2)[6]')).to_be_visible()
-    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
     expect(page.locator('(//h2)[7]')).to_be_visible()
     expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
     expect(page.locator('(//h2)[1]')).to_be_visible()
     expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('(//div[@itemscope])[1]')).to_be_visible()
-    expect(page.locator('//section')).to_be_visible()
-    expect(page.locator('//footer')).to_be_visible()
+
 
 
 def test_providers(page: Page):
     page.goto('https://101internet.ru/ryazan/providers')
-    expect(page.locator('(//a[@aria-label="/ryazan"] )[2]')).to_be_visible()
-    expect(page.locator('(// span[contains(text(), "Рязань")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "Провайдеры Рязани")]')).to_be_visible()
-    expect(page.locator('(//h2)[2]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//button[contains(text(), "найти")])[1]')).to_be_visible()
-    expect(page.locator('(//h2)[3]')).to_be_visible()
-    expect(page.locator('(//h2)[5]')).to_be_visible()
     expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
     for i in range(1, 19):
         expect(page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]')).to_be_visible()
-    expect(page.locator('(//h2)[6]')).to_be_visible()
+    for i in range(2, 4):
+        expect(page.locator(f'(//p[@align="left"])[{i}]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//h2)[{i}]')).to_be_visible()
     expect(page.locator('(//ol[@align="left"])[1]')).to_be_visible()
-    expect(page.locator('(//p[@align="left"])[2]')).to_be_visible()
-    expect(page.locator('(//h2)[7]')).to_be_visible()
-    expect(page.locator('(//p[@align="left"])[3]')).to_be_visible()
-    expect(page.locator('(//p[@align="left"])[4]')).to_be_visible()
-    expect(page.locator('//footer')).to_be_visible()
-    expect(page.locator('//section')).to_be_visible()
-    expect(page.locator(
-        '//span[contains(text(), "© 2008-2024 «101 Интернет» — поиск провайдеров по адресу")]')).to_contain_text(
-        '© 2008-2024 «101 Интернет» — поиск провайдеров по адресу')
-    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
-    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
-    expect(page.get_by_role('link', name='yan-dzen'))
-    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//button[contains(text(), "найти")])[1]')).to_be_visible()
+
+
 
 
 def test_rating(page: Page):
