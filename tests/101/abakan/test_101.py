@@ -1,27 +1,34 @@
 from playwright.sync_api import Page, expect
-from conftest import header
+from pages.main_site_pages.main_page_101 import MainPage101
 
 
 def test_main_page(page: Page):
     page.goto('https://101internet.ru/abakan')
-    expect(page.locator('(//div[@ datatest="main_button_enter"])[1]')).to_be_visible()
-    expect(page.locator('//h1[contains(text(), "Подключить интернет")]')).to_contain_text('Подключить интернет')
-    expect(page.locator('(//div[contains(text(), "Введите адрес и сравните тарифы всех провайдеров в своём доме - '
-                        'подключайтесь с гарантией 90 дней!")])[1]')).to_be_visible()
-    expect(page.locator('(//a[@datatest="providers_provider_alltariff_button"])[1]')).to_have_text('Показать все')
-    expect(page.locator('(//button[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
-    expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
-    expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
-    expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')
-    expect(page.locator('//div[@class="onlyNotMd onlyNotSm onlyNotXs col-lg-4"]')).to_contain_text('Бесплатная консультация')
-    expect(page.locator('(//h2[contains(text(), "Наши партнеры в Абакане")])[2]')).to_contain_text('Наши партнеры в Абакане ')
-    expect(page.locator('(//div[@class="row"])[7]')).to_be_visible()
-    expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
-    expect(page.locator('(//h2)[9]')).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "Все")])[1]')).to_be_visible()
-    expect(page.locator('//div[@datatest="main_inflat_button"]')).to_contain_text('ИнтернетВ квартиру')
-    expect(page.locator('//div[@datatest="main_inhouse_button"]')).to_contain_text('ИнтернетНа дачу')
-    expect(page.locator('//div[@datatest="main_inoffice_button"]')).to_contain_text('ИнтернетВ офис')
+    main_page = MainPage101(page)
+    main_page.check_common_header_elements()
+    # header(page)
+    # footer(page)
+    expect(page.locator("#HeaderMenu")).to_contain_text("БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ")
+    expect(page.locator("#HeaderMenu")).to_contain_text("+7 (800) 302-32-76")
+    expect(page.locator("#HeaderMenu").get_by_role("link", name="call")).to_be_visible()
+    # expect(page.locator('(//div[@ datatest="main_button_enter"])[1]')).to_be_visible()
+    # expect(page.locator('//h1[contains(text(), "Подключить интернет")]')).to_contain_text('Подключить интернет')
+    # expect(page.locator('(//div[contains(text(), "Введите адрес и сравните тарифы всех провайдеров в своём доме - '
+    #                     'подключайтесь с гарантией 90 дней!")])[1]')).to_be_visible()
+    # expect(page.locator('(//a[@datatest="providers_provider_alltariff_button"])[1]')).to_have_text('Показать все')
+    # expect(page.locator('(//button[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
+    # expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
+    # expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
+    # expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')
+    # expect(page.locator('//div[@class="onlyNotMd onlyNotSm onlyNotXs col-lg-4"]')).to_contain_text('Бесплатная консультация')
+    # expect(page.locator('(//h2[contains(text(), "Наши партнеры в Абакане")])[2]')).to_contain_text('Наши партнеры в Абакане ')
+    # expect(page.locator('(//div[@class="row"])[7]')).to_be_visible()
+    # expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
+    # expect(page.locator('(//h2)[9]')).to_be_visible()
+    # expect(page.locator('(//div[contains(text(), "Все")])[1]')).to_be_visible()
+    # expect(page.locator('//div[@datatest="main_inflat_button"]')).to_contain_text('ИнтернетВ квартиру')
+    # expect(page.locator('//div[@datatest="main_inhouse_button"]')).to_contain_text('ИнтернетНа дачу')
+    # expect(page.locator('//div[@datatest="main_inoffice_button"]')).to_contain_text('ИнтернетВ офис')
 
 
 
