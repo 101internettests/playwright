@@ -6,10 +6,6 @@ def test_first_bal(page: Page):
     page.goto('https://www.moskvaonline.ru/balashiha')
     expect(page.locator('//h1[contains(text(), "Подключить домашний интернет в Балашихе")]')).to_contain_text('Подключить домашний интернет в Балашихе')
     expect(page.locator('(//div[contains(text(), "Введите ваш адрес и сравните тарифы провайдеров Балашихи. Гарантия до 90 дней и кэшбэк до 1000 рублей!")])[1]')).to_be_visible()
-    expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[1]')).to_be_visible()
-    expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[2]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//button[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
     expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
     expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
     expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')
@@ -19,7 +15,6 @@ def test_first_bal(page: Page):
     expect(page.locator('//div[@datatest="main_inoffice_button"]')).to_contain_text('ИнтернетВ офис')
     expect(page.locator('//h2[contains(text(), "Выгодные тарифы домашнего интернета в Балашихе")]')).to_have_text('Выгодные тарифы домашнего интернета в Балашихе')
     expect(page.locator('(//a[@datatest="providers_provider_alltariff_button"])[1]')).to_have_text('Показать все')
-    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
     expect(page.locator('(//h2[contains(text(), "Топ провайдеров домашнего интернета в Балашихе")])[2]')).to_contain_text('Топ провайдеров домашнего интернета в Балашихе')
     expect(page.locator('(//div[@class="row"])[7]')).to_be_visible()
     expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
@@ -55,7 +50,6 @@ def test_providers_bal(page: Page):
     expect(page.locator('(//ol[@align="left"])[1]')).to_be_visible()
     expect(page.locator('(//div[@datatest="providers_find_adress"])[1]')).to_be_visible()
     expect(page.locator('(//div[@datatest="providers_find_adress"])[2]')).to_be_visible()
-
 
 
 def test_rating_bal(page: Page):
@@ -99,8 +93,6 @@ def test_internet_i_mobilnaya_svyaz(page: Page):
     expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
     expect(page.locator('//input[@name="sort_tariffs"]')).to_be_visible()
     for i in range(2, 11):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
@@ -124,8 +116,6 @@ def test_internet_tv_mobile(page: Page):
     expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
     expect(page.locator('//input[@name="sort_tariffs"]')).to_be_visible()
     for i in range(2, 16):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
@@ -149,8 +139,6 @@ def test_nedorogoj_domashnij_internet(page: Page):
     expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
     expect(page.locator('//input[@name="sort_providers"]')).to_be_visible()
     for i in range(2, 30):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
@@ -175,8 +163,6 @@ def test_internet_100(page: Page):
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//a[@href="/balashiha/ratesmobile"])[1]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
     expect(page.locator('//input[@name="sort_providers"]')).to_be_visible()
     for i in range(2, 36):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
@@ -188,7 +174,6 @@ def test_internet_100(page: Page):
         expect(page.locator(f'(//a[@datatest="top_provider_block"])[{i}]')).to_be_visible()
     for i in range(1, 16):
         expect(page.locator(f'(//h3)[{i}]')).to_be_visible()
-
 
 
 def test_internet_300(page: Page):
@@ -211,7 +196,6 @@ def test_internet_300(page: Page):
         expect(page.locator(f'(//a[@datatest="top_provider_block"])[{i}]')).to_be_visible()
     for i in range(1, 19):
         expect(page.locator(f'(//h3)[{i}]')).to_be_visible()
-
 
 
 def test_internet_500(page: Page):

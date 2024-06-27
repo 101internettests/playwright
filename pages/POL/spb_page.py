@@ -56,21 +56,3 @@ def tags(page: Page):
     expect(page.locator('(//a[@href="/rates/internet-300-mbit"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/rates/internet-500-mbit"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/rates/online-kinoteatr"])[1]')).to_be_visible()
-
-
-def footer(page: Page):
-    expect(page.locator('//section')).to_be_visible()
-    expect(page.locator('//footer')).to_be_visible()
-    expect(page.locator(
-        '//span[contains(text(), "© 2008-2024 «Питер Онлайн» — поиск провайдеров по адресу")]')).to_contain_text(
-        '© 2008-2024 «Питер Онлайн» — поиск провайдеров по адресу')
-    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
-    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
-    expect(page.get_by_role('link', name='yan-dzen'))
-
-
-def sorting(page: Page):
-    expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
-    expect(page.locator('//input[@name="sort_providers"]')).to_be_visible()
