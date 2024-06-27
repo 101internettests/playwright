@@ -1,18 +1,22 @@
 from playwright.sync_api import Page, expect
+from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form
+from pages.main_page import check_footer, blue_form_second, search_tariffs_second, sorting
+from pages.main_site_pages.ryazan_page import review, check_tags, check_header_ryazan
 
 
-# Тест на проверку наличия всех элементов на первой странице
 def test_mani_page(page: Page):
     page.goto('https://101internet.ru/ryazan')
-    expect(page.locator('(// a[@ aria-label="call"])[1]')).to_contain_text('БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ')
-    expect(page.locator('(// div[@ datatest="main_button_enter"])[1]')).to_be_visible()
+    check_header(page)
+    check_footer(page)
+    review(page)
+    one_click_form(page)
+    blue_form(page)
+    search_tariffs(page)
+    check_header_ryazan(page)
     expect(page.locator('//h1[contains(text(), "Подключить интернет")]')).to_contain_text('Подключить интернет')
-    expect(page.locator('(//div[contains(text(), "Введите адрес и сравните тарифы всех провайдеров в своём доме - '
-                        'подключайтесь с гарантией 90 дней!")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Введите адрес и сравните тарифы всех провайдеров в своём доме – подключайтесь с гарантией 90 дней!")])[1]')).to_be_visible()
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[1]')).to_be_visible()
     expect(page.locator('(//input[@ datatest="main_input_street_home_new"])[2]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//button[@ data-test="find_tohome_button"])[1]')).to_contain_text('показать тарифы')
     expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
     expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
     expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')
@@ -21,7 +25,6 @@ def test_mani_page(page: Page):
     expect(page.locator('//div[@datatest="main_inhouse_button"]')).to_contain_text('ИнтернетНа дачу')
     expect(page.locator('//div[@datatest="main_inoffice_button"]')).to_contain_text('ИнтернетВ офис')
     expect(page.locator('(//a[@datatest="providers_provider_alltariff_button"])[1]')).to_have_text('Показать все')
-    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
     expect(page.locator('(//h2[contains(text(), "Наши партнеры в Рязани")])[2]')).to_contain_text('Наши партнеры в Рязани ')
     expect(page.locator('(//div[@class="row"])[7]')).to_be_visible()
     expect(page.locator('//div[@class="row"]//div[@class="col-12 col-sm-6 col-md-4 col-lg-3"]').nth(4))
@@ -31,6 +34,12 @@ def test_mani_page(page: Page):
 
 def test_tohome(page: Page):
     page.goto('https://101internet.ru/ryazan/orders/tohome')
+    check_header(page)
+    check_footer(page)
+    one_click_form(page)
+    blue_form(page)
+    search_tariffs(page)
+    check_header_ryazan(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "поиск по адресу")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Провайдеры интернета по адресу в Рязани")]')).to_be_visible()
@@ -46,9 +55,14 @@ def test_tohome(page: Page):
     expect(page.locator('(//div[@itemscope])[1]')).to_be_visible()
 
 
-
 def test_providers(page: Page):
     page.goto('https://101internet.ru/ryazan/providers')
+    check_header(page)
+    check_footer(page)
+    blue_form(page)
+    blue_form_second(page)
+    search_tariffs_second(page)
+    check_header_ryazan(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "Провайдеры Рязани")]')).to_be_visible()
     expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
@@ -61,10 +75,12 @@ def test_providers(page: Page):
     expect(page.locator('(//ol[@align="left"])[1]')).to_be_visible()
 
 
-
-
 def test_rating(page: Page):
     page.goto('https://101internet.ru/ryazan/rating')
+    check_header(page)
+    check_footer(page)
+    search_tariffs_second(page)
+    check_header_ryazan(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "Рейтинг провайдеров")]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "Период")]')).to_be_visible()
@@ -79,6 +95,11 @@ def test_rating(page: Page):
 
 def test_rates(page: Page):
     page.goto('https://101internet.ru/ryazan/rates')
+    check_header(page)
+    check_footer(page)
+    search_tariffs(page)
+    check_header_ryazan(page)
+    sorting(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тарифы на интернет")])[1]')).to_be_visible()
     expect(page.locator('(//h1)[1]')).to_be_visible()
@@ -98,6 +119,8 @@ def test_rates(page: Page):
 
 def test_personal_datarates(page: Page):
     page.goto('https://101internet.ru/ryazan/about/personal-data')
+    check_header(page)
+    check_footer(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Политика обработки персональных данных")])[1]')).to_be_visible()
     expect(page.locator('//h1')).to_be_visible()
@@ -117,6 +140,12 @@ def test_personal_datarates(page: Page):
 
 def test_internet_i_mobilnaya_svyaz(page: Page):
     page.goto('https://101internet.ru/ryazan/rates/internet-i-mobilnaya-svyaz')
+    check_header(page)
+    check_footer(page)
+    search_tariffs(page)
+    check_header_ryazan(page)
+    check_tags(page)
+    sorting(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тарифы на интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Интернет и мобильная связь")])[1]')).to_be_visible()
@@ -126,9 +155,6 @@ def test_internet_i_mobilnaya_svyaz(page: Page):
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//a[@href="/ryazan/ratesmobile"])[1]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
-    expect(page.locator('//input[@name="sort_tariffs"]')).to_be_visible()
     for i in range(2, 12):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
     for i in range(2, 12):
@@ -143,6 +169,12 @@ def test_internet_i_mobilnaya_svyaz(page: Page):
 
 def test_internet_tv_mobile(page: Page):
     page.goto('https://101internet.ru/ryazan/rates/internet-tv-mobile')
+    check_header(page)
+    check_footer(page)
+    search_tariffs(page)
+    check_header_ryazan(page)
+    check_tags(page)
+    sorting(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Тарифы на интернет")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Интернет+тв+мобильная связь")])[1]')).to_be_visible()
@@ -152,8 +184,6 @@ def test_internet_tv_mobile(page: Page):
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//a[@href="/ryazan/ratesmobile"])[1]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "ПРОВАЙДЕР")])[1]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
     expect(page.locator('//input[@name="sort_tariffs"]')).to_be_visible()
     for i in range(2, 16):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
