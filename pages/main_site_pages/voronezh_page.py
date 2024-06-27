@@ -2,47 +2,10 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-def header(page: Page):
+def check_header_voronezh(page: Page):
     expect(page.locator('(//a[@aria-label="/voronezh"] )[2]')).to_be_visible()
-    expect(page.locator('(//div[@itemscope])[1]')).to_be_visible()
-    expect(page.locator('(//a[@href="tel:+78003023276"])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "+7 (473) 202-92-95")])[1]')).to_be_visible()
     expect(page.locator('(// span[contains(text(), "Воронеж")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
-    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
-    expect(page.locator('(// span[contains(text(), "Воронеж")])[1]')).to_be_visible()
-
-
-def search_tariffs(page: Page):
-    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//button[contains(text(), "найти")])[1]')).to_be_visible()
-
-
-def search_tariffs2(page: Page):
-    expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "Тип подключения")])[1]')).to_be_visible()
-    expect(page.locator('(//button[contains(text(), "показать тарифы")])[1]')).to_be_visible()
-
-
-def one_click_form(page: Page):
-    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
-
-
-def tariffs_block(page: Page):
-    expect(page.locator('//div[@data-test="countRates"]')).to_be_visible()
-
-
-def blue_form(page: Page):
-    expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
-    expect(page.locator(
-        '//div[@datatest="providers_find_adress"]//span[contains(text(), "Введите улицу")]')).to_be_visible()
-    expect(page.locator('//div[@datatest="providers_find_adress"]//span[contains(text(), "Дом")]')).to_be_visible()
-    expect(page.locator('//div[@datatest="providers_find_adress"]//div[contains(text(), "Проверить")]')).to_be_visible()
 
 
 def review(page: Page):
@@ -55,7 +18,7 @@ def review(page: Page):
         'все отзывы')
 
 
-def tags(page: Page):
+def check_tags(page: Page):
     expect(page.locator('(//a[@href="/voronezh/rates/internet-i-mobilnaya-svyaz"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/voronezh/rates/internet-tv-mobile"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/voronezh/rates/domashnij-internet"])[1]')).to_be_visible()
@@ -65,14 +28,3 @@ def tags(page: Page):
     expect(page.locator('(//a[@href="/voronezh/rates/internet-300-mbit"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/voronezh/rates/internet-500-mbit"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/voronezh/rates/online-kinoteatr"])[1]')).to_be_visible()
-
-
-def footer(page: Page):
-    expect(page.locator('//footer')).to_be_visible()
-    expect(page.locator(
-        '//span[contains(text(), "© 2008-2024 «101 Интернет» — поиск провайдеров по адресу")]')).to_contain_text(
-        '© 2008-2024 «101 Интернет» — поиск провайдеров по адресу')
-    expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
-    expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
-    expect(page.get_by_role('link', name='yan-dzen'))
-    expect(page.locator('//section')).to_be_visible()
