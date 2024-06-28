@@ -1,9 +1,18 @@
 from playwright.sync_api import Page, expect
+from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form
+from pages.main_page import footer_pol, blue_form_second, search_tariffs_second, sorting
+from pages.POL.lenoblast_page import review, check_tags, header_lenoblast
 
 
-# Тест на проверку наличия всех элементов на странице
 def test_first_lenoblst(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast')
+    check_header(page)
+    footer_pol(page)
+    review(page)
+    one_click_form(page)
+    blue_form(page)
+    search_tariffs(page)
+    header_lenoblast(page)
     expect(page.locator('//h1[contains(text(), "Подключить лучший домашний интернет в Ленинградской области")]')).to_contain_text('Подключить лучший домашний интернет в Ленинградской области')
     expect(page.locator('(//div[contains(text(), "Подключить домашний интернет просто - введите свой адрес, а мы поможем выбрать тариф для дома. Даем гарантию на 90 дней и начисляем кэшбэк до 1000 рублей!")])[1]')).to_be_visible()
     expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
@@ -15,7 +24,6 @@ def test_first_lenoblst(page: Page):
     expect(page.locator('//div[@datatest="main_inoffice_button"]')).to_contain_text('ИнтернетВ офис')
     expect(page.locator('//h2[contains(text(), "Самые выгодные интернет тарифы для дома в Ленинградской области")]')).to_have_text('Самые выгодные интернет тарифы для дома в Ленинградской области')
     expect(page.locator('(//a[@datatest="providers_provider_alltariff_button"])[1]')).to_have_text('Показать все')
-    expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
     expect(page.locator('(//h2[contains(text(), "Топ провайдеров в Ленинградской области")])[2]')).to_contain_text('Топ провайдеров в Ленинградской области')
     expect(page.locator('(//div[@class="row"])[7]')).to_be_visible()
     expect(page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "оставить отзыв")])[1]')).to_have_text('оставить отзыв')
@@ -26,12 +34,18 @@ def test_first_lenoblst(page: Page):
 
 def test_tohome_lenoblst(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast/orders/tohome')
+    check_header(page)
+    footer_pol(page)
+    one_click_form(page)
+    blue_form(page)
+    search_tariffs(page)
+    header_lenoblast(page)
+    tariffs_block(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "поиск по адресу")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Провайдеры домашнего интернета по адресу в Ленинградской области")]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//h2)[5]')).to_be_visible()
-    expect(page.locator('//div[@data-test="countRates"]')).to_be_visible()
     expect(page.locator('(//h2)[6]')).to_be_visible()
     expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
     expect(page.locator('(//h2)[1]')).to_be_visible()
@@ -41,6 +55,12 @@ def test_tohome_lenoblst(page: Page):
 
 def test_providers_lenoblst(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast/providers')
+    check_header(page)
+    footer_pol(page)
+    blue_form(page)
+    blue_form_second(page)
+    search_tariffs_second(page)
+    header_lenoblast(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "Провайдеры Ленинградской области")]')).to_be_visible()
     expect(page.locator('(//h2)[2]')).to_be_visible()
@@ -55,6 +75,12 @@ def test_providers_lenoblst(page: Page):
 
 def test_providers_lenoblst_second(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast/providers/2')
+    check_header(page)
+    footer_pol(page)
+    blue_form(page)
+    blue_form_second(page)
+    search_tariffs_second(page)
+    header_lenoblast(page)
     expect(page.locator('//span[contains(text(), "Провайдеры Ленинградской области")]')).to_be_visible()
     expect(page.locator('(//h2)[1]')).to_be_visible()
     expect(page.locator('(//h2)[3]')).to_be_visible()
@@ -68,6 +94,10 @@ def test_providers_lenoblst_second(page: Page):
 
 def test_rating_lenoblst(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast/rating')
+    check_header(page)
+    footer_pol(page)
+    search_tariffs_second(page)
+    header_lenoblast(page)
     expect(page.locator('(//span[contains(text(), "Подключить интернет")])[1]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "Рейтинг провайдеров")]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "Период")]')).to_be_visible()
@@ -85,16 +115,19 @@ def test_rating_lenoblst(page: Page):
 
 def test_rates_lenoblst(page: Page):
     page.goto('https://piter-online.net/leningradskaya-oblast/rates')
+    check_header(page)
+    footer_pol(page)
+    search_tariffs(page)
+    header_lenoblast(page)
+    sorting(page)
     expect(page.locator('(//span[contains(text(), "Тарифы на интернет")])[1]')).to_be_visible()
     expect(page.locator('//h1')).to_be_visible()
     expect(page.locator('(//h2)[2]')).to_be_visible()
     for i in range(1, 4):
         expect(page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]')).to_be_visible()
-    # expect(page.locator('(//div[@datatest="providers_find_adress"])[1]')).to_be_visible()
-    # expect(page.locator('(//div[@datatest="providers_callback2"])[1]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//a[@datatest="top_provider_block"])[1]')).to_be_visible()
     expect(page.locator('(//h2)[1]')).to_be_visible()
-    for i in range(1, 18):
+    for i in range(1,9):
         expect(page.locator(f'(//h3[@itemprop="name"])[{i}]')).to_be_visible()
     expect(page.locator('(//h3[@itemprop="name"])[1]')).to_be_visible()

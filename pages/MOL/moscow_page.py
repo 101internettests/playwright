@@ -2,12 +2,12 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-def header(page: Page):
+def header_mol(page: Page):
     expect(page.locator('(//a[@aria-label="/"])[2]')).to_be_visible()
     expect(page.locator('(// span[contains(text(), "Москва")])[1]')).to_be_visible()
 
 
-def rewiew(page: Page):
+def review(page: Page):
     expect(
         page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "оставить отзыв")])[1]')).to_have_text(
         'оставить отзыв')
@@ -15,7 +15,7 @@ def rewiew(page: Page):
         'все отзывы')
 
 
-def tags(page: Page):
+def check_tags(page: Page):
     expect(page.locator('(//a[@href="/rates/internet-i-mobilnaya-svyaz"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/rates/internet-tv-mobile"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/rates/domashnij-internet"])[1]')).to_be_visible()
