@@ -199,3 +199,10 @@ def sorting_providers_rates(page: Page):
     expect(page.locator('//div[@datatest="providers_provider_input_internetspeed"]')).to_be_visible()
     expect(page.locator('//div[@datatest="providers_provider_input_priceinmonth"]')).to_be_visible()
     expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+
+
+def ooops_stub(page: Page):
+    expect(page.locator('//span[@class="icon48 icon-hearts"]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Упс")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Похоже, что по вашему запросу нет подходящих тарифов. Попробуйте сбросить значения фильтров.")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сбросить фильтры")]')).to_be_visible()
