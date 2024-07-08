@@ -15,6 +15,17 @@ def check_header(page: Page):
     expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
 
 
+def check_header_operator_page(page: Page):
+    expect(page.locator('(//div[@ datatest="main_button_enter"])[1]')).to_be_visible()
+    expect(page.locator('(//div[@itemscope])[1]')).to_be_visible()
+    expect(page.locator('(// div[@ datatest="main_button_enter"])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Поиск по адресу")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "провайдеры")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "рейтинг")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
+
+
 def search_tariffs(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
@@ -292,3 +303,61 @@ def contact_feedback(page: Page):
         "Пожалуйста, изложите суть обращения. Укажите ссылки, если это необходимо")
     expect(page.locator("form")).to_contain_text("Хочу получить ответ")
     expect(page.locator("form")).to_contain_text("Отправить")
+
+
+def contact_page(page: Page):
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator("span").filter(has_text="Контакты")).to_be_visible()
+    expect(page.get_by_role("heading", name="Контакты")).to_be_visible()
+    expect(page.get_by_text("Сотрудничество и реклама")).to_be_visible()
+    expect(page.get_by_text("Для резюме")).to_be_visible()
+    expect(page.get_by_text("Контактный центр")).to_be_visible()
+    expect(page.get_by_text("Рассмотрим предложения о сотрудничестве и рекламе")).to_be_visible()
+    expect(page.get_by_text("Резюме с рассказом о себе высылайте нам")).to_be_visible()
+    expect(page.get_by_text("Единый телефон контактного центра")).to_be_visible()
+    expect(page.get_by_label("mail").first).to_be_visible()
+    expect(page.get_by_text("hr@101internet.ru")).to_be_visible()
+    expect(page.get_by_text("+7 800 302-32-76", exact=True)).to_be_visible()
+    expect(page.get_by_text("Схема проезда")).to_be_visible()
+    expect(page.frame_locator("iframe[title=\"Схема проезда в офис 101 интернет на Яндекс Картах\"]").locator(
+        ".search-placemark-icons__active > svg")).to_be_visible()
+    page.get_by_text("Адрес: Россия, Москва, Тихая ул., 33, офис").click()
+    expect(page.get_by_text("Тел.: +7 800 302-32-")).to_be_visible()
+    expect(page.get_by_text("Время работы")).to_be_visible()
+    expect(page.get_by_text(
+        "Консультация физических лицПонедельник - воскресеньеКруглосуточноКонсультация юр")).to_be_visible()
+    expect(page.get_by_text("Реквизиты ООО \"ИНТЕРНЕТ ПРОМОУШЕН\"")).to_be_visible()
+    expect(page.get_by_text("ООО \"ИНТЕРНЕТ ПРОМОУШЕН\"Юридический адрес: 390005")).to_be_visible()
+    expect(page.get_by_text("Стать партнером")).to_be_visible()
+    expect(page.get_by_placeholder("Ваше имя*")).to_be_visible()
+    expect(page.get_by_placeholder("Ваш телефон*")).to_be_visible()
+    expect(page.get_by_text("Отправить", exact=True)).to_be_visible()
+    expect(page.get_by_text("Обратная связь").first).to_be_visible()
+    expect(page.get_by_role("link", name="Обратная связь")).to_be_visible()
+    expect(page.get_by_text("Обратная связьe-mailpr@")).to_be_visible()
+    expect(page.get_by_role("heading", name="Частые вопросы")).to_be_visible()
+
+
+def tags_mobile(page: Page):
+    expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="eSIM")).to_be_visible()
+    expect(page.get_by_role("link", name="Роуминг за границей")).to_be_visible()
+    expect(page.get_by_role("link", name="Семейные")).to_be_visible()
+    expect(page.get_by_role("link", name="Выгодные")).to_be_visible()
+    expect(page.get_by_role("link", name="Для планшета")).to_be_visible()
+    expect(page.get_by_role("link", name="Детские")).to_be_visible()
+    expect(page.get_by_role("link", name="Безлимитная связь")).to_be_visible()
+    expect(page.get_by_role("link", name="Связь по России")).to_be_visible()
+    expect(page.get_by_role("link", name="Безлимитный интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Перейти со своим номером")).to_be_visible()
+    expect(page.get_by_role("link", name="Непубличные🔥")).to_be_visible()
+    expect(page.get_by_role("link", name="Для модема/роутера")).to_be_visible()
+
+
+def tags_for_operatory(page: Page):
+    expect(page.get_by_text("минуты", exact=True)).to_be_visible()
+    expect(page.get_by_text("От 0До")).to_be_visible()
+    expect(page.get_by_text("интернет (гб)")).to_be_visible()
+    expect(page.get_by_text("От 3До")).to_be_visible()
+    expect(page.get_by_text("абонентская плата (руб)")).to_be_visible()
+    expect(page.get_by_text("От 120До")).to_be_visible()
