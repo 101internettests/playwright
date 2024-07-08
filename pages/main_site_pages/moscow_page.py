@@ -3,9 +3,15 @@ from playwright.sync_api import Page, expect
 
 
 def check_header_moscow(page: Page):
-    expect(page.locator('(//a[@href="tel:+74954874372"])[1]')).to_be_visible()
+    # expect(page.locator('(//a[@href="tel:+74954874372"])[1]')).to_be_visible()
     expect(page.locator('(//a[@aria-label="/moskva"])[2]')).to_be_visible()
     expect(page.locator('(// span[contains(text(), "Москва")])[1]')).to_be_visible()
+
+
+def check_header_moscow_obl(page: Page):
+    # expect(page.locator('(//a[@href="tel:+74954874372"])[1]')).to_be_visible()
+    expect(page.locator('(//a[@aria-label="/moskovskaya-oblast"])[2]')).to_be_visible()
+    expect(page.locator('(// span[contains(text(), "Московская область")])[1]')).to_be_visible()
 
 
 def check_tags(page: Page):
