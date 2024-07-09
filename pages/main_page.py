@@ -361,3 +361,12 @@ def tags_for_operatory(page: Page):
     expect(page.get_by_text("От 3До")).to_be_visible()
     expect(page.get_by_text("абонентская плата (руб)")).to_be_visible()
     expect(page.get_by_text("От 120До")).to_be_visible()
+
+
+def tags_nomera_mobile(page: Page):
+    expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="Бронзовые")).to_be_visible()
+    expect(page.get_by_role("link", name="Серебряные")).to_be_visible()
+    expect(page.get_by_role("link", name="Золотые")).to_be_visible()
+    expect(page.get_by_role("link", name="Платиновые")).to_be_visible()
+    expect(page.get_by_role("link", name="Бесплатные")).to_be_visible()
