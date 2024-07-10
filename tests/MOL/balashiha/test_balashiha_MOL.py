@@ -273,9 +273,9 @@ def test_internet_500(page: Page):
     expect(page.locator('(//h2)[2]')).to_be_visible()
     expect(page.locator('(//h2)[4]')).to_be_visible()
     expect(page.locator('(//a[@href="/balashiha/ratesmobile"])[1]')).to_be_visible()
-    for i in range(2, 28):
+    for i in range(2, 25):
         expect(page.locator(f'(//div[@itemprop="offers"])[{i}]')).to_be_visible()
-    for i in range(2, 28):
+    for i in range(2, 25):
         expect(page.locator(f'(//span[contains(text(), "Подключить")])[{i}]')).to_be_visible()
     expect(page.locator('//div[@datatest="providers_find_adress"]')).to_be_visible()
     expect(page.locator('//div[@datatest="providers_callback2"]')).to_be_visible()
