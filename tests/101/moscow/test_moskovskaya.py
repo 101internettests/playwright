@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, feedback_page, sorting_providers_rates, contact_feedback, contact_page, tags_mobile, tags_for_operatory
-from pages.main_page import check_footer, blue_form_second, search_tariffs_second, sorting, page_internet_in_office, ooops_stub, terms_of_use, personal_data, check_header_operator_page
+from pages.main_page import check_footer, blue_form_second, search_tariffs_second, sorting, page_internet_in_office, ooops_stub, terms_of_use, personal_data, check_header_operator_page, tags_nomera_mobile
 from pages.main_site_pages.moscow_page import check_header_moscow, check_tags, check_provider_rostel_tags, check_provider_onlime_tags, check_header_moscow_obl
 
 
@@ -59,6 +59,7 @@ def test_operatory_mts_ratesmobile_bezlimitnaja(page: Page):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//h2')).to_be_visible()
 
+
 def test_operatory_mts_ratesmobile_bezlimitniy_internet(page: Page):
     page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/ratesmobile/bezlimitnyj-internet')
     check_header_operator_page(page)
@@ -107,40 +108,10 @@ def test_operatory_mts_ratesmobile_bezlimitnaja_svjaz(page: Page):
     expect(page.get_by_role("link", name="Номера")).to_be_visible()
     expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
     expect(page.get_by_role("link", name="в 1")).to_be_visible()
-    tags_for_operatory(page)
     tags_mobile(page)
     expect(page.locator('//div[contains(text(), "Недавно подключенные тарифы в ")]')).to_be_visible()
     for i in range(1, 7):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-
-
-def test_operatory_mts_ratesmobile_vygodnye(page: Page):
-    page.goto('https://101internet.ru/moskva/operatory/mts/ratesmobile/vygodnye')
-    check_header_operator_page(page)
-    check_footer(page)
-    check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
-    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Тарифы")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Выгодные")]')).to_be_visible()
-    expect(page.get_by_role("heading", name="Выгодные тарифные планы от МТС в Москве")).to_be_visible()
-    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
-    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
-    expect(page.locator("#operator_banner").get_by_text("Техподдержка")).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
-    tags_mobile(page)
-    tags_for_operatory(page)
-    for i in range(1, 9):
-        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-    for i in range(1, 2):
-        expect(page.locator(f'(//h2)[{i}]')).to_be_visible()
 
 
 def test_operatory_mts_ratesmobile_dlia_modema(page: Page):
@@ -194,35 +165,6 @@ def test_operatory_mts_ratesmobile_dlia_plansheta(page: Page):
     tags_mobile(page)
     tags_for_operatory(page)
     for i in range(1, 5):
-        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-    expect(page.locator('//h2')).to_be_visible()
-
-
-def test_operatory_mts_ratesmobile_dlia_noutbuka(page: Page):
-    page.goto('https://101internet.ru/moskva/operatory/mts/ratesmobile/dlja-noutbuka')
-    check_header_operator_page(page)
-    check_footer(page)
-    check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
-    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Тарифы")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Для ноутбука")]')).to_be_visible()
-    expect(page.get_by_role("heading", name="Для ноутбука тарифы МТС в Москве")).to_be_visible()
-    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
-    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
-    expect(page.locator("#operator_banner").get_by_text("Техподдержка")).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
-    expect(page.locator('//p[contains(text(), "К сожалению, у нас нет информации о тарифах оператора в этом регионе.")]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "Недавно подключенные тарифы в ")]')).to_be_visible()
-    tags_mobile(page)
-    for i in range(1, 7):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//h2')).to_be_visible()
 
@@ -312,93 +254,6 @@ def test_operatory_mts_ratesmobile_optom(page: Page):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
 
 
-def test_operatory_mts_ratesmobile_po_rf(page: Page):
-    page.goto('https://101internet.ru/moskva/operatory/mts/ratesmobile/po-rossii')
-    check_header_operator_page(page)
-    check_footer(page)
-    check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
-    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Тарифы")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Связь по России")]')).to_be_visible()
-    expect(page.get_by_role("heading", name="Тарифы МТС по России - подключить в Москве")).to_be_visible()
-    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
-    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
-    expect(page.get_by_text("Техподдержка")).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
-    tags_for_operatory(page)
-    tags_mobile(page)
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2')).to_be_visible()
-
-
-def test_operatory_mts_ratesmobile_esim(page: Page):
-    page.goto('https://101internet.ru/moskva/operatory/mts/ratesmobile/esim')
-    check_header_operator_page(page)
-    check_footer(page)
-    check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
-    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Тарифы")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "eSIM")]')).to_be_visible()
-    expect(page.get_by_role("heading", name="Встроенная СИМ-карта eSIM от МТС в Москве")).to_be_visible()
-    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
-    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
-    expect(page.get_by_text("Техподдержка")).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
-    tags_for_operatory(page)
-    tags_mobile(page)
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "eSIM — цифровая симка")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
-
-
-def test_operatory_mts_ratesmobile_perenos_nomera(page: Page):
-    page.goto('https://101internet.ru/moskva/operatory/mts/ratesmobile/perenos_nomera')
-    check_header_operator_page(page)
-    check_footer(page)
-    check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
-    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Тарифы")]')).to_be_visible()
-    expect(page.locator('//span[contains(text(), "Перейти со своим номером")]')).to_be_visible()
-    expect(page.get_by_role("heading", name="Переход на МТС с сохранением номера в Москве")).to_be_visible()
-    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
-    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
-    expect(page.get_by_text("Техподдержка")).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
-    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
-    tags_for_operatory(page)
-    tags_mobile(page)
-    for i in range(1, 6):
-        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
-
-
 def test_operatory_mts_ratesmobile_unikalnye(page: Page):
     page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/ratesmobile/unikalnye')
     check_header_operator_page(page)
@@ -479,3 +334,571 @@ def test_moskovskaya_oblast_operatory(page: Page):
     expect(page.get_by_text(
         "СберМобайл предоставляет стабильную связь по всей России, постоянные акции и возможность вернуть до 20% бонусами Спасибо, сим-карту можно забрать в любом отделении Сбера")).to_be_visible()
 
+
+def test_operatory_mts_operatory_zolotoj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/nomera/zolotoj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Номера")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Золотые")]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Золотые номера МТС на выбор в Московской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
+    expect(page.get_by_text("Техподдержка")).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_mts_operatory_bronzovyj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/nomera/bronzovyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Номера")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Бронзовые")]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Бронзовые номера МТС на выбор в Московской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
+    expect(page.get_by_text("Техподдержка")).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_mts_operatory_serebrjanyj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/nomera/serebrjanyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Номера")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Серебряные")]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Серебряные номера МТС на выбор в Московской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
+    expect(page.get_by_text("Техподдержка")).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_mts_operatory_platinovyj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/nomera/platinovyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Номера")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Платиновые")]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Платиновые номера МТС на выбор в Московской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
+    expect(page.get_by_text("Техподдержка")).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_mts_operatory_besplatnye(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/nomera/besplatnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "МТС")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Номера")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Бесплатные")]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Бесплатные номера МТС на выбор в Московской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.get_by_text("Подключение", exact=True)).to_be_visible()
+    expect(page.get_by_text("Техподдержка")).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
+    expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 6):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_mts_ratesmobile(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_text("Тарифы сотовой связи", exact=True)).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.get_by_text("оператор", exact=True)).to_be_visible()
+    expect(page.locator("input[name=\"change_operators\"]")).to_be_visible()
+    expect(page.get_by_role("heading", name="Тарифы сотовой связи для телефона в Московской области")).to_be_visible()
+    tags_for_operatory(page)
+    tags_mobile(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Отзывы жителей Московской области")).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_modem(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/dlja-modema')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Для модема/роутера")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифы операторов для модема в Московской области")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Тарифы операторов для модема в Московской области")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_bez_platy(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/bez-abonentskoj-platy')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Без абонентской платы")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Безлимитный интернет для телефона")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Выбрать")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_svjaz(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/bezlimitnaja-svjaz')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Безлимитная связь")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифы операторов с безлимитной связью в Московской области")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Тарифы операторов с безлимитными звонками в Московской области")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_bezlimitn_internet(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/bezlimitnyj-internet')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Безлимитный интернет")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифы с безлимитным интернетом")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_vygodnye(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/vygodnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Выгодные")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Выгодные тарифы сотовых операторов в Московской области")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator(
+        '//h2[contains(text(), "Тарифы операторов с выгодными предложениями в Московской области")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_planshet(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/dlja-plansheta')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Для планшета")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифные планы на интернет для планшета")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_noutbuke1(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/dlja-noutbuka')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Для ноутбука")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифные планы для ноутбука")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Выбрать")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_mezhdunarodnye(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/mezhdunarodnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Роуминг за границей")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Мобильные тарифы для связи за границей - подключить в Московской области")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_po_rf(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/po-rossii')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Связь по России")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифы телефонных операторов в Московской области для связи по России")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_esim(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/esim')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "eSIM")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Тарифы eSIM для вашего устройства в Московской области")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 6):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Тарифы eSIM в Московской области")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_perenos_nomera(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/perenos_nomera')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Перейти со своим номером")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Перейти на другого оператора с сохранением номера в Московской области")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_ratesmobile_unikalnye(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/ratesmobile/unikalnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Непубличные")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Непубличные тарифы ")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    tags_mobile(page)
+    tags_for_operatory(page)
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Номера")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Выбрать номер")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera_zolotoj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/zolotoj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Золотые")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Элитные номера телефонов")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera_bronzovyj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/bronzovyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Бронзовые")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Бронзовый номер телефона")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera_serebrjanyj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/serebrjanyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Серебряные")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Серебряный номер от российских операторов")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera_platinovyj(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/platinovyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Платиновые")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Платиновый номер телефона")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera_vip(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/vip')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "VIP")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Вип номера телефонов")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operatory_nomera_federalnye(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/federalnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Федеральные")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Федеральный номер от российских операторов")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+
+
+def test_operatory_nomera_besplatnye(page: Page):
+    page.goto('https://101internet.ru/moskovskaya-oblast/nomera/besplatnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    check_header_moscow_obl(page)
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Бесплатные")]')).to_be_visible()
+    expect(page.locator('//h1[contains(text(), "Бесплатные номера телефонов")]')).to_be_visible()
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()

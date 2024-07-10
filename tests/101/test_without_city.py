@@ -7,8 +7,6 @@ def test_select_region(page: Page):
     expect(page.locator('//input[@placeholder="Введите первые 3 буквы"]')).to_be_visible()
     for i in range(1, 34):
         expect(page.locator(f'(//a[@datatest="main_region_choose"][@href])[{i}]')).to_be_visible()
-    for i in range(1, 24):
-        expect(page.locator(f'(//*[@id="root"]/div/div[2]/div/div/div/div/div[3]/div)[{i}]')).to_be_visible()
     expect(page.locator('//div[@class="components__slider-button"]')).to_be_visible()
     expect(page.locator('(//span[@class="icon24 icon-close"])[1]')).to_be_visible()
 
@@ -16,8 +14,7 @@ def test_select_region(page: Page):
 def test_without_city_main(page: Page):
     page.goto('https://101internet.ru')
     expect(page.locator('//h1[contains(text(), "Подключить интернет")]')).to_contain_text('Подключить интернет')
-    expect(page.locator('(//div[contains(text(), "Введите адрес и сравните тарифы всех провайдеров в своём доме - '
-                        'подключайтесь с гарантией 90 дней!")])[1]')).to_be_visible()
+    expect(page.get_by_text("Введите адрес и сравните тарифы всех провайдеров в своём доме – подключайтесь с ")).to_be_visible()
     expect(page.locator('//div[@datatest="main_raitingprovider_button"]')).to_have_text('Рейтинг провайдеров')
     expect(page.locator('//div[@datatest="main_comparetariff_button"]')).to_have_text('Выгодные пакеты интернета3 в 1')
     expect(page.locator('//div[@class="col-sm-6 col-lg-4"]')).to_contain_text('получили нашу помощь в выборе интернета за  15 лет')

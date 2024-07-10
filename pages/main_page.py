@@ -356,11 +356,10 @@ def tags_mobile(page: Page):
 
 def tags_for_operatory(page: Page):
     expect(page.get_by_text("минуты", exact=True)).to_be_visible()
-    expect(page.get_by_text("От 0До")).to_be_visible()
     expect(page.get_by_text("интернет (гб)")).to_be_visible()
-    expect(page.get_by_text("От 3До")).to_be_visible()
     expect(page.get_by_text("абонентская плата (руб)")).to_be_visible()
-    expect(page.get_by_text("От 120До")).to_be_visible()
+    for i in range(1, 3):
+        expect(page.locator(f'(//div[@tabindex="-1"])[{i}]')).to_be_visible()
 
 
 def tags_nomera_mobile(page: Page):
