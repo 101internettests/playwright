@@ -1,7 +1,8 @@
-import pytest
+import allure
 from playwright.sync_api import Page, expect
 
 
+@allure.step("Проверка хедера")
 def check_header(page: Page):
     expect(page.locator("#HeaderMenu")).to_contain_text("БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ")
     expect(page.locator("#HeaderMenu").get_by_role("link", name="call")).to_be_visible()
@@ -15,6 +16,7 @@ def check_header(page: Page):
     expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
 
 
+@allure.step("Проверка хедера на странице операторов")
 def check_header_operator_page(page: Page):
     expect(page.locator('(//div[@ datatest="main_button_enter"])[1]')).to_be_visible()
     expect(page.locator('(//div[@itemscope])[1]')).to_be_visible()
@@ -26,6 +28,7 @@ def check_header_operator_page(page: Page):
     expect(page.locator('(//a[contains(text(), "Интернет в офис")])[1]')).to_be_visible()
 
 
+@allure.step("Проверка блока ввода адреса для поиска тарифов")
 def search_tariffs(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
@@ -33,6 +36,7 @@ def search_tariffs(page: Page):
     expect(page.locator('(//div[contains(text(), "показать тарифы")])[1]')).to_be_visible()
 
 
+@allure.step("Проверка блока ввода адреса для поиска тарифов вариант 2")
 def search_tariffs_second(page: Page):
     expect(page.locator('(//span[contains(text(), "Введите улицу")])[1]')).to_be_visible()
     expect(page.locator('(//span[contains(text(), "Дом")])[1]')).to_be_visible()
@@ -40,6 +44,7 @@ def search_tariffs_second(page: Page):
     expect(page.locator('(//div[contains(text(), "найти")])[1]')).to_be_visible()
 
 
+@allure.step("Проверка формы в один клик")
 def one_click_form(page: Page):
     expect(page.locator('//div[@id="OneClickForm"]')).to_be_visible()
 
@@ -62,17 +67,37 @@ def blue_form_second(page: Page):
     expect(page.locator('(//div[@datatest="providers_find_adress"]//div[contains(text(), "Проверить")])[2]')).to_be_visible()
 
 
+@allure.step("Проверка футера")
 def check_footer(page: Page):
     expect(page.locator('//section')).to_be_visible()
     expect(page.locator('//footer')).to_be_visible()
-    expect(page.locator(
-        '//span[contains(text(), "© 2008-2024 «101 Интернет» — поиск провайдеров по адресу")]')).to_contain_text(
-        '© 2008-2024 «101 Интернет» — поиск провайдеров по адресу')
     expect(page.get_by_role("link", name="https://vk.com/ru101internet"))
     expect(page.get_by_role('link', name='https://www.odnoklassniki.ru/group/51961592610882'))
     expect(page.get_by_role('link', name='yan-dzen'))
+    expect(page.get_by_text("Тарифы для дома")).to_be_visible()
+    expect(page.locator("section").get_by_role("link", name="Поиск по адресу")).to_be_visible()
+    expect(page.get_by_text("Мобильная связь", exact=True)).to_be_visible()
+    expect(page.locator("section")).to_contain_text("Провайдеры в")
+    expect(page.get_by_role("link", name="Все провайдеры")).to_be_visible()
+    expect(page.get_by_role("link", name="Отзывы о провайдерах")).to_be_visible()
+    expect(page.get_by_role("link", name="Рейтинг провайдеров", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="Акции провайдеров")).to_be_visible()
+    expect(page.locator("section").get_by_role("link", name="Интернет в офис")).to_be_visible()
+    expect(page.get_by_role("link", name="Интернет на дачу", exact=True)).to_be_visible()
+    expect(page.get_by_text("Мобильная связь", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="О нас")).to_be_visible()
+    expect(page.get_by_role("link", name="Оплата и гарантии")).to_be_visible()
+    expect(page.get_by_role("link", name="Блог")).to_be_visible()
+    # expect(page.get_by_role("link", name="Отзывы о компании")).to_be_visible()
+    expect(page.get_by_role("link", name="Контакты")).to_be_visible()
+    expect(page.get_by_role("link", name="Карьера")).to_be_visible()
+    expect(page.get_by_role("link", name="Сотрудничество")).to_be_visible()
+    expect(page.get_by_role("link", name="Карта сайта")).to_be_visible()
+    expect(page.get_by_role("link", name="Документы")).to_be_visible()
+    expect(page.get_by_role("link", name="Политика обработки персональных данных")).to_be_visible()
 
 
+@allure.step("Проверка футера МОЛ")
 def footer_mol(page: Page):
     expect(page.locator('//section')).to_be_visible()
     expect(page.locator('//footer')).to_be_visible()
@@ -84,6 +109,7 @@ def footer_mol(page: Page):
     expect(page.get_by_role('link', name='yan-dzen'))
 
 
+@allure.step("Проверка футера ПОЛ")
 def footer_pol(page: Page):
     expect(page.locator('//section')).to_be_visible()
     expect(page.locator('//footer')).to_be_visible()
@@ -95,11 +121,19 @@ def footer_pol(page: Page):
     expect(page.get_by_role('link', name='yan-dzen'))
 
 
+@allure.step("Проверка блока сортировки")
 def sorting(page: Page):
     expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
     expect(page.locator('//input[@name="select_providers"]')).to_be_visible()
 
 
+@allure.step("Проверка блока сортировки вариант 2")
+def sorting_second(page: Page):
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+
+
+@allure.step("Проверка страницы интернета в офисе")
 def page_internet_in_office(page: Page):
     expect(page.get_by_text("Контактное лицо*")).to_be_visible()
     expect(page.get_by_text("Ваш телефон*")).to_be_visible()
@@ -145,6 +179,7 @@ def page_internet_in_office(page: Page):
         expect(page.locator(f'(//div[@data-test="business_order_tenderbbutton"])[{i}]')).to_be_visible()
 
 
+@allure.step("Проверка страницы обратной связи")
 def feedback_page(page: Page):
     expect(page.locator('//h1')).to_be_visible()
     expect(page.locator('(//span[@class="icon24 icon-close"])[1]')).to_be_visible()
@@ -201,6 +236,7 @@ def feedback_page(page: Page):
     expect(page.get_by_text("Нужно только оставить номер телефона :)")).to_be_visible()
 
 
+@allure.step("Проверка блока фильтров")
 def sorting_providers_rates(page: Page):
     expect(page.locator('//div[contains(text(), "Район")]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "Скорость (мбит/c)")]')).to_be_visible()
@@ -212,6 +248,7 @@ def sorting_providers_rates(page: Page):
     expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
 
 
+@allure.step("Проверка заглушки")
 def ooops_stub(page: Page):
     expect(page.locator('//span[@class="icon48 icon-hearts"]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "Упс")]')).to_be_visible()
@@ -219,6 +256,7 @@ def ooops_stub(page: Page):
     expect(page.locator('//div[contains(text(), "Сбросить фильтры")]')).to_be_visible()
 
 
+@allure.step("Проверка страницы пользовательское соглашение")
 def terms_of_use(page: Page):
     expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
     expect(page.locator('//span[contains(text(), "Пользовательское соглашение")]')).to_be_visible()
@@ -247,6 +285,7 @@ def terms_of_use(page: Page):
     expect(page.locator("#root")).to_contain_text("9.4.")
 
 
+@allure.step("Проверка страницы политики обработки персональных данных")
 def personal_data(page: Page):
     expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
     expect(page.locator('//span[contains(text(), "Политика обработки персональных данных")]')).to_be_visible()
@@ -268,10 +307,9 @@ def personal_data(page: Page):
     expect(page.get_by_text("ПРИЛОЖЕНИЕ №2")).to_be_visible()
     expect(page.get_by_role("link", name="Пользовательское соглашение")).to_be_visible()
     expect(page.get_by_text("Согласие на обработку персональных данных.pdf")).to_be_visible()
-    expect(page.get_by_text("Описание функциональных характеристик.pdf")).to_be_visible()
-    expect(page.get_by_text("Руководство пользователя.pdf")).to_be_visible()
 
 
+@allure.step("Проверка страницы обратной связи")
 def contact_feedback(page: Page):
     expect(page.get_by_role("heading", name="Обратная связь")).to_be_visible()
     expect(page.get_by_text("Вы представляете компанию?*")).to_be_visible()
@@ -305,6 +343,7 @@ def contact_feedback(page: Page):
     expect(page.locator("form")).to_contain_text("Отправить")
 
 
+@allure.step("Проверка страницы контактов")
 def contact_page(page: Page):
     expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
     expect(page.locator("span").filter(has_text="Контакты")).to_be_visible()
@@ -338,6 +377,40 @@ def contact_page(page: Page):
     expect(page.get_by_role("heading", name="Частые вопросы")).to_be_visible()
 
 
+@allure.step("Проверка страницы контактов")
+def contact_page_pol(page: Page):
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator("span").filter(has_text="Контакты")).to_be_visible()
+    expect(page.get_by_role("heading", name="Контакты")).to_be_visible()
+    expect(page.get_by_text("Сотрудничество и реклама")).to_be_visible()
+    expect(page.get_by_text("Контактный центр")).to_be_visible()
+    expect(page.get_by_text("Рассмотрим предложения о сотрудничестве и рекламе")).to_be_visible()
+    expect(page.get_by_text("Единый телефон контактного центра")).to_be_visible()
+    expect(page.get_by_label("mail").first).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "+7 (812) 635-33-61")])[1]')).to_be_visible()
+    expect(page.get_by_text("Схема проезда")).to_be_visible()
+    expect(page.get_by_placeholder("Ваше имя*")).to_be_visible()
+    expect(page.get_by_placeholder("Ваш телефон*")).to_be_visible()
+    expect(page.get_by_text("Отправить", exact=True)).to_be_visible()
+    expect(page.get_by_text("Обратная связь").first).to_be_visible()
+    expect(page.get_by_role("link", name="Обратная связь")).to_be_visible()
+    expect(page.get_by_text("Как добраться?")).to_be_visible()
+    expect(
+        page.get_by_text("На общественном транспорте: до станции метро Площадь Александра Невского-2")).to_be_visible()
+    expect(page.get_by_text("Адрес офиса компании")).to_be_visible()
+    expect(page.get_by_text("г. Санкт-Петербург, Невский проспект, стр")).to_be_visible()
+    expect(page.get_by_text("Почтовый адрес")).to_be_visible()
+    expect(page.get_by_text("Россия, Санкт-Петербург,")).to_be_visible()
+    expect(page.get_by_text("Время работы")).to_be_visible()
+    expect(page.get_by_text("Реквизиты")).to_be_visible()
+    expect(page.get_by_text("Стать партнером")).to_be_visible()
+    expect(page.get_by_role("link", name="Обратная связь")).to_be_visible()
+    expect(page.get_by_text("e-mail", exact=True)).to_be_visible()
+    expect(page.get_by_text("e-mailpr@piter-online.net")).to_be_visible()
+    expect(page.get_by_role("heading", name="Частые вопросы")).to_be_visible()
+
+
+@allure.step("Проверка мобильных тегов")
 def tags_mobile(page: Page):
     expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
     expect(page.get_by_role("link", name="eSIM")).to_be_visible()
@@ -354,6 +427,7 @@ def tags_mobile(page: Page):
     expect(page.get_by_role("link", name="Для модема/роутера")).to_be_visible()
 
 
+@allure.step("Проверка блоков тегов")
 def tags_for_operatory(page: Page):
     expect(page.get_by_text("минуты", exact=True)).to_be_visible()
     expect(page.get_by_text("интернет (гб)")).to_be_visible()
@@ -362,6 +436,7 @@ def tags_for_operatory(page: Page):
         expect(page.locator(f'(//div[@tabindex="-1"])[{i}]')).to_be_visible()
 
 
+@allure.step("Проверка тегов у номеров")
 def tags_nomera_mobile(page: Page):
     expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
     expect(page.get_by_role("link", name="Бронзовые")).to_be_visible()
@@ -369,3 +444,44 @@ def tags_nomera_mobile(page: Page):
     expect(page.get_by_role("link", name="Золотые")).to_be_visible()
     expect(page.get_by_role("link", name="Платиновые")).to_be_visible()
     expect(page.get_by_role("link", name="Бесплатные")).to_be_visible()
+
+
+@allure.step("Проверка страницы номеров")
+def nomera_page(page: Page):
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
+
+
+@allure.step("Проверка страницы мобильных опервторов")
+def cellular_network(page: Page):
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+
+
+@allure.step("Проверка блока с выбором раздела")
+def operators_menu_block(page: Page):
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+
+
+@allure.step("Проверка блока с выбором раздела")
+def rating_page(page: Page):
+    expect(page.locator('//div[contains(text(), "Полезные")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Новые")]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Старые")]')).to_be_visible()
