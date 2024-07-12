@@ -1,9 +1,13 @@
+import allure
+import pytest
 from playwright.sync_api import Page, expect
-from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, feedback_page, sorting_providers_rates, contact_feedback, contact_page, tags_mobile, tags_for_operatory
-from pages.main_page import check_footer, blue_form_second, search_tariffs_second, sorting, page_internet_in_office, ooops_stub, terms_of_use, personal_data, check_header_operator_page, tags_nomera_mobile
-from pages.main_site_pages.moscow_page import check_header_moscow, check_tags, check_provider_rostel_tags, check_provider_onlime_tags, check_header_moscow_obl
+from pages.main_page import sorting_providers_rates,tags_mobile, tags_for_operatory, nomera_page
+from pages.main_page import check_footer, sorting, ooops_stub, operators_menu_block
+from pages.main_page import check_header_operator_page, tags_nomera_mobile, cellular_network, sorting_second
+from pages.main_site_pages.moscow_page import check_header_moscow_obl
 
 
+@allure.title("Проверка страницы тарифов бещз абонентской платы в Моск. обл. 101")
 def test_operatory_mts_ratesmobile_bez_platy(page: Page):
     page.goto('https://101internet.ru/moskovskaya-oblast/operatory/mts/ratesmobile/bez-abonentskoj-platy')
     check_header_operator_page(page)
@@ -351,11 +355,7 @@ def test_operatory_mts_operatory_zolotoj(page: Page):
     expect(page.get_by_text("Техподдержка")).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    operators_menu_block(page)
     expect(page.locator(
         '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
     tags_nomera_mobile(page)
@@ -381,11 +381,7 @@ def test_operatory_mts_operatory_bronzovyj(page: Page):
     expect(page.get_by_text("Техподдержка")).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    operators_menu_block(page)
     expect(page.locator(
         '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
     tags_nomera_mobile(page)
@@ -411,11 +407,7 @@ def test_operatory_mts_operatory_serebrjanyj(page: Page):
     expect(page.get_by_text("Техподдержка")).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    operators_menu_block(page)
     expect(page.locator(
         '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
     tags_nomera_mobile(page)
@@ -441,11 +433,7 @@ def test_operatory_mts_operatory_platinovyj(page: Page):
     expect(page.get_by_text("Техподдержка")).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    operators_menu_block(page)
     expect(page.locator(
         '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
     tags_nomera_mobile(page)
@@ -471,11 +459,7 @@ def test_operatory_mts_operatory_besplatnye(page: Page):
     expect(page.get_by_text("Техподдержка")).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7  (800)  250-08-90")]')).to_be_visible()
     expect(page.locator('//a[contains(text(), "+7 (800) 250-08-90")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="Номера").nth(1)).to_be_visible()
-    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
-    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    operators_menu_block(page)
     expect(page.locator(
         '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
     tags_nomera_mobile(page)
@@ -498,8 +482,7 @@ def test_operatory_mts_ratesmobile(page: Page):
     expect(page.get_by_role("heading", name="Тарифы сотовой связи для телефона в Московской области")).to_be_visible()
     tags_for_operatory(page)
     tags_mobile(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    sorting_second(page)
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
@@ -512,21 +495,15 @@ def test_operatory_ratesmobile_modem(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Для модема/роутера")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифы операторов для модема в Московской области")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//h2[contains(text(), "Тарифы операторов для модема в Московской области")]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_bez_platy(page: Page):
@@ -542,8 +519,7 @@ def test_operatory_ratesmobile_bez_platy(page: Page):
     expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    sorting_second(page)
     expect(page.locator('//div[contains(text(), "Выбрать")]')).to_be_visible()
 
 
@@ -552,21 +528,15 @@ def test_operatory_ratesmobile_svjaz(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Безлимитная связь")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифы операторов с безлимитной связью в Московской области")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//h2[contains(text(), "Тарифы операторов с безлимитными звонками в Московской области")]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_bezlimitn_internet(page: Page):
@@ -574,20 +544,14 @@ def test_operatory_ratesmobile_bezlimitn_internet(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Безлимитный интернет")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифы с безлимитным интернетом")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_vygodnye(page: Page):
@@ -603,8 +567,7 @@ def test_operatory_ratesmobile_vygodnye(page: Page):
     expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    sorting_second(page)
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
@@ -617,20 +580,14 @@ def test_operatory_ratesmobile_planshet(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Для планшета")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифные планы на интернет для планшета")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_noutbuke1(page: Page):
@@ -638,18 +595,12 @@ def test_operatory_ratesmobile_noutbuke1(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Для ноутбука")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифные планы для ноутбука")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "Выбрать")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_mezhdunarodnye(page: Page):
@@ -657,19 +608,12 @@ def test_operatory_ratesmobile_mezhdunarodnye(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
     expect(page.locator('//span[contains(text(), "Роуминг за границей")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Мобильные тарифы для связи за границей - подключить в Московской области")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 6):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_po_rf(page: Page):
@@ -677,20 +621,14 @@ def test_operatory_ratesmobile_po_rf(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Связь по России")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифы телефонных операторов в Московской области для связи по России")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 6):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_esim(page: Page):
@@ -698,21 +636,15 @@ def test_operatory_ratesmobile_esim(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "eSIM")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Тарифы eSIM для вашего устройства в Московской области")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 6):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
     expect(page.locator('//h2[contains(text(), "Тарифы eSIM в Московской области")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_perenos_nomera(page: Page):
@@ -720,20 +652,14 @@ def test_operatory_ratesmobile_perenos_nomera(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Перейти со своим номером")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Перейти на другого оператора с сохранением номера в Московской области")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_unikalnye(page: Page):
@@ -741,20 +667,15 @@ def test_operatory_ratesmobile_unikalnye(page: Page):
     check_header_operator_page(page)
     check_footer(page)
     check_header_moscow_obl(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
+    cellular_network(page)
     expect(page.locator('//span[contains(text(), "Непубличные")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Непубличные тарифы ")]')).to_be_visible()
-    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
-    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
-    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    cellular_network(page)
     for i in range(1, 15):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_nomera(page: Page):
@@ -780,16 +701,9 @@ def test_operatory_nomera_zolotoj(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    nomera_page(page)
     expect(page.locator('//span[contains(text(), "Золотые")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Элитные номера телефонов")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_nomera_bronzovyj(page: Page):
@@ -798,16 +712,9 @@ def test_operatory_nomera_bronzovyj(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    nomera_page(page)
     expect(page.locator('//span[contains(text(), "Бронзовые")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Бронзовый номер телефона")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_nomera_serebrjanyj(page: Page):
@@ -816,16 +723,9 @@ def test_operatory_nomera_serebrjanyj(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    nomera_page(page)
     expect(page.locator('//span[contains(text(), "Серебряные")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Серебряный номер от российских операторов")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_nomera_platinovyj(page: Page):
@@ -834,16 +734,9 @@ def test_operatory_nomera_platinovyj(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    nomera_page(page)
     expect(page.locator('//span[contains(text(), "Платиновые")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Платиновый номер телефона")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_nomera_vip(page: Page):
@@ -852,16 +745,9 @@ def test_operatory_nomera_vip(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    nomera_page(page)
     expect(page.locator('//span[contains(text(), "VIP")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Вип номера телефонов")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
 
 
 def test_operatory_nomera_federalnye(page: Page):
@@ -870,18 +756,9 @@ def test_operatory_nomera_federalnye(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
+    nomera_page(page)
     expect(page.locator('//span[contains(text(), "Федеральные")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Федеральный номер от российских операторов")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
-    expect(page.locator(
-        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
 
 
 def test_operatory_nomera_besplatnye(page: Page):
@@ -890,15 +767,6 @@ def test_operatory_nomera_besplatnye(page: Page):
     check_footer(page)
     check_header_moscow_obl(page)
     tags_nomera_mobile(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Номера")).to_be_visible()
     expect(page.locator('//span[contains(text(), "Бесплатные")]')).to_be_visible()
     expect(page.locator('//h1[contains(text(), "Бесплатные номера телефонов")]')).to_be_visible()
-    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
-    expect(page.get_by_role("link", name="VIP")).to_be_visible()
-    for i in range(1, 15):
-        expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
-    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
-    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
-    expect(page.locator(
-        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    nomera_page(page)
