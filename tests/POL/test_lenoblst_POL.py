@@ -1,7 +1,7 @@
 from playwright.sync_api import Page, expect
-from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form
-from pages.main_page import footer_pol, blue_form_second, search_tariffs_second, sorting
-from pages.POL.lenoblast_page import review, check_tags, header_lenoblast
+from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, check_header_operator_page
+from pages.main_page import footer_pol, blue_form_second, search_tariffs_second, sorting, check_footer
+from pages.POL.lenoblast_page import review, header_lenoblast
 
 
 def test_first_lenoblst(page: Page):
@@ -131,3 +131,74 @@ def test_rates_lenoblst(page: Page):
     for i in range(1,9):
         expect(page.locator(f'(//h3[@itemprop="name"])[{i}]')).to_be_visible()
     expect(page.locator('(//h3[@itemprop="name"])[1]')).to_be_visible()
+
+
+def test_providers_betatelekom(page: Page):
+    page.goto('https://piter-online.net/leningradskaya-oblast/providers/beta-telekom')
+    header_lenoblast(page)
+    check_footer(page)
+    footer_pol(page)
+    check_header(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Провайдеры Ленинградской области")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Бета Телеком")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Тарифы на домашний интернет и ТВ Бета Телеком в Ленинградской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    search_tariffs(page)
+    expect(page.get_by_role("link", name="О провайдере")).to_be_visible()
+    expect(page.get_by_text("контакты", exact=True)).to_be_visible()
+    expect(page.get_by_text("Город")).to_be_visible()
+    expect(page.get_by_text("Главный офис")).to_be_visible()
+    expect(page.get_by_text("Юридическое наименование")).to_be_visible()
+    expect(page.get_by_text("другое")).to_be_visible()
+    expect(page.get_by_role("heading", name="Топ провайдеров в Ленинградской области")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы провайдера Дом.ру Дом.ру")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы провайдера МТС МТС")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы провайдера Ростелеком Ростелеком")).to_be_visible()
+    expect(page.get_by_role("heading", name="Недавно подключенные тарифы в Ленинградской области")).to_be_visible()
+    for i in range(2, 6):
+        expect(page.locator(f'(//span[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Частые вопросы")).to_be_visible()
+
+
+def test_providers_betateleko(page: Page):
+    page.goto('https://piter-online.net/leningradskaya-oblast/providers/beta-telekom')
+    header_lenoblast(page)
+    check_footer(page)
+    footer_pol(page)
+    check_header(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Провайдеры Ленинградской области")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Бета Телеком")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Тарифы на домашний интернет и ТВ Бета Телеком в Ленинградской области")).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    search_tariffs(page)
+    expect(page.get_by_role("link", name="О провайдере")).to_be_visible()
+    expect(page.get_by_text("контакты", exact=True)).to_be_visible()
+    expect(page.get_by_text("Город")).to_be_visible()
+    expect(page.get_by_text("Главный офис")).to_be_visible()
+    expect(page.get_by_text("Юридическое наименование")).to_be_visible()
+    expect(page.get_by_text("другое")).to_be_visible()
+    expect(page.get_by_role("heading", name="Топ провайдеров в Ленинградской области")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы провайдера Дом.ру Дом.ру")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы провайдера МТС МТС")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы провайдера Ростелеком Ростелеком")).to_be_visible()
+    expect(page.get_by_role("heading", name="Недавно подключенные тарифы в Ленинградской области")).to_be_visible()
+    for i in range(2, 6):
+        expect(page.locator(f'(//span[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Частые вопросы")).to_be_visible()
+
+
+def test_operatory_lonoblast(page: Page):
+    page.goto('https://piter-online.net/leningradskaya-oblast/operatory')
+    header_lenoblast(page)
+    check_footer(page)
+    footer_pol(page)
+    check_header_operator_page(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Мобильные операторы")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Мобильные операторы")).to_be_visible()
+    for i in range(1, 7):
+        expect(page.locator(f'(//span[contains(text(), "Подробнее")])[{i}]')).to_be_visible()
+    for i in range(1, 7):
+        expect(page.locator(f'(//div[@datatest="operators_operator_button"])[{i}]')).to_be_visible()
