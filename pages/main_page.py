@@ -460,7 +460,7 @@ def nomera_page(page: Page):
         expect(page.locator(f'(//div[contains(text(), "Подключить На официальном сайте")])[{i}]')).to_be_visible()
 
 
-@allure.step("Проверка страницы мобильных опервторов")
+@allure.step("Проверка страницы мобильных операторов")
 def cellular_network(page: Page):
     expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
     expect(page.get_by_role("link", name="Тарифы сотовой связи")).to_be_visible()
