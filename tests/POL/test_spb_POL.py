@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
-from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, sorting_second, personal_data, tags_for_operatory
-from pages.main_page import footer_pol, blue_form_second, search_tariffs_second, sorting, check_footer, terms_of_use, tags_mobile, check_header_operator_page
+from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, sorting_second, personal_data, tags_for_operatory, cellular_network
+from pages.main_page import footer_pol, blue_form_second, search_tariffs_second, sorting, check_footer, terms_of_use, tags_mobile, check_header_operator_page, tags_nomera_mobile
 from pages.main_page import feedback_page, page_internet_in_office, rating_page, operators_menu_block, contact_page_pol, contact_feedback
 from pages.POL.spb_page import review, check_tags, header_spb
 
@@ -1793,3 +1793,273 @@ def test_operatory_tele2_actions(page: Page):
     for i in range(1, 7):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
     expect(page.locator('(//h2)[1]')).to_be_visible()
+
+
+def test_ratesmobile(page: Page):
+    page.goto('https://piter-online.net/ratesmobile')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Тарифы сотовой связи")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    tags_for_operatory(page)
+    tags_mobile(page)
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+
+
+def test_ratesmobile_modem(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/dlja-modema')
+    test_ratesmobile(page)
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_ratesmobile_bezlimitn(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/bezlimitnyj-internet')
+    test_ratesmobile(page)
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_ratesmobile_vygodnye(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/vygodnye')
+    test_ratesmobile(page)
+    expect(page.locator("#root")).to_contain_text("Выгодные")
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_ratesmobile_planshet(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/dlja-plansheta')
+    test_ratesmobile(page)
+    expect(page.locator("#root")).to_contain_text("Для планшета")
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_ratesmobile_noutbuk(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/dlja-noutbuka')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Тарифы сотовой связи")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Для ноутбука")]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    tags_for_operatory(page)
+    tags_mobile(page)
+    expect(page.locator('//div[contains(text(), "Выбрать")]')).to_be_visible()
+
+
+def test_ratesmobile_mezhdunarodnye(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/mezhdunarodnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Тарифы сотовой связи")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Роуминг за границей")]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    tags_for_operatory(page)
+    tags_mobile(page)
+    for i in range(1, 6):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+
+
+def test_ratesmobile_porf(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/po-rossii')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Тарифы сотовой связи")]')).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Связь по России")]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    tags_for_operatory(page)
+    tags_mobile(page)
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_ratesmobile_esim(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/esim')
+    test_ratesmobile_porf(page)
+
+
+def test_ratesmobile_perenos_nomera(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/perenos_nomera')
+    test_ratesmobile(page)
+
+
+def test_ratesmobile_unikalnye(page: Page):
+    page.goto('https://piter-online.net/ratesmobile/unikalnye')
+    test_ratesmobile(page)
+
+
+def test_choose_nomer(page: Page):
+    page.goto('https://piter-online.net/nomera')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Выбрать номер")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_choose_zolotoj(page: Page):
+    page.goto('https://piter-online.net/nomera/zolotoj')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Золотые")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Элитные номера телефонов")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_nomera_bronzovyj(page: Page):
+    page.goto('https://piter-online.net/nomera/bronzovyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Бронзовые")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Бронзовый номер телефона")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_nomera_serebrjanyj(page: Page):
+    page.goto('https://piter-online.net/nomera/serebrjanyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Серебряные")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Серебряный номер от российских операторов")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_nomera_platinovyj(page: Page):
+    page.goto('https://piter-online.net/nomera/platinovyj')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Платиновые")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Платиновый номер телефона")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_nomera_vip(page: Page):
+    page.goto('https://piter-online.net/nomera/vip')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "VIP")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Вип номера телефонов")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 8):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+
+
+def test_nomera_federalnye(page: Page):
+    page.goto('https://piter-online.net/nomera/federalnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Федеральные")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Федеральный номер от российских операторов")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
+
+
+def test_nomera_besplatnye(page: Page):
+    page.goto('https://piter-online.net/nomera/besplatnye')
+    check_header_operator_page(page)
+    check_footer(page)
+    footer_pol(page)
+    header_spb(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Бесплатные")])[1]')).to_be_visible()
+    expect(page.get_by_role("heading", name="Бесплатные номера телефонов")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")])[1]')).to_be_visible()
+    tags_nomera_mobile(page)
+    expect(page.get_by_role("link", name="Федеральные")).to_be_visible()
+    expect(page.get_by_role("link", name="VIP")).to_be_visible()
+    for i in range(1, 15):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")])[1]')).to_be_visible()
