@@ -600,7 +600,8 @@ def test_operatory_ratesmobile_noutbuke1(page: Page):
     expect(page.locator('//h1[contains(text(), "Тарифные планы для ноутбука")]')).to_be_visible()
     tags_mobile(page)
     tags_for_operatory(page)
-    expect(page.locator('//div[contains(text(), "Выбрать")]')).to_be_visible()
+    for i in range(1, 2):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
 
 
 def test_operatory_ratesmobile_mezhdunarodnye(page: Page):
