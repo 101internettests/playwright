@@ -14,6 +14,15 @@ def review(page: Page):
     expect(page.locator('(//a[@datatest="main_allreviews_button"][contains(text(), "все отзывы")])[1]')).to_have_text(
         'все отзывы')
 
+def tags_yota(page: Page):
+    expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="eSIM")).to_be_visible()
+    expect(page.get_by_role("link", name="Для модема/роутера")).to_be_visible()
+    expect(page.get_by_role("link", name="Выгодные")).to_be_visible()
+    expect(page.get_by_role("link", name="Для планшета")).to_be_visible()
+    expect(page.get_by_role("link", name="Связь по России")).to_be_visible()
+    expect(page.get_by_role("link", name="Безлимитный интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Перейти со своим номером")).to_be_visible()
 
 def check_tags(page: Page):
     expect(page.locator('(//a[@href="/balashiha/rates/internet-i-mobilnaya-svyaz"])[1]')).to_be_visible()
