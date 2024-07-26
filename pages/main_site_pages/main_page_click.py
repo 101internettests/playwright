@@ -27,16 +27,18 @@ def check_footer(page: Page):
     page.get_by_role("link", name="Карта сайта").click()
 
 
-def check_career(page: Page):
+def check_footer_career(page: Page):
     page.goto('https://101internet.ru/abakan')
     page.get_by_role("link", name="Карьера").click()
 
 
-def check_blog(page: Page):
+def check_footer_blog(page: Page):
     page.goto('https://101internet.ru/abakan')
     page.get_by_role("link", name="Блог").click()
 
 
-def check_rewievs(page: Page):
+def check_footer_rewievs(page: Page):
     page.goto('https://101internet.ru/abakan')
     page.get_by_role("link", name="Отзывы о компании").click()
+
+
