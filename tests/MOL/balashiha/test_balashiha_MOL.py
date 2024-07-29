@@ -1741,4 +1741,3 @@ def test_operator_yota_ratesmobile_perenos_porf(page: Page):
     tags_yota(page)
     for i in range(1, 2):
         expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
-
