@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
-from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form
-from pages.main_page import footer_mol, blue_form_second, search_tariffs_second, sorting
+from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, check_header_operator_page, tags_mobile
+from pages.main_page import footer_mol, blue_form_second, search_tariffs_second, sorting, tags_for_operatory, tags_nomera_mobile
 from pages.MOL.moscow_page import review, check_tags, header_mol
 
 
@@ -450,3 +450,160 @@ def test_address(page: Page):
     for i in range(1, 6):
         expect(page.locator(f'(//p)[{i}]')).to_be_visible()
     expect(page.locator('(//h2)[2]')).to_be_visible()
+
+
+def test_operator_mts_nomer_serebrjanyj_platinovyj_bronzovyj_zolotoj(page: Page):
+    urls = [
+        'https://www.moskvaonline.ru/operatory/mts/nomera/serebrjanyj',
+        'https://www.moskvaonline.ru/operatory/mts/nomera/platinovyj',
+        'https://www.moskvaonline.ru/operatory/mts/nomera/bronzovyj',
+        'https://www.moskvaonline.ru/operatory/mts/nomera/zolotoj'
+    ]
+    for url in urls:
+        page.goto(url)
+    check_header_operator_page(page)
+    footer_mol(page)
+    header_mol(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "МТС")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "+7  (800)  250-08-90")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Техподдержка")])[1]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 16):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('//div[contains(text(), "ПОКАЗАТЬ ЕЩЁ")]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operator_mts_nomer_besplatnye(page: Page):
+    page.goto('https://www.moskvaonline.ru/operatory/mts/nomera/besplatnye')
+    check_header_operator_page(page)
+    footer_mol(page)
+    header_mol(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "МТС")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Номера")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Бесплатные")])[1]')).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "+7  (800)  250-08-90")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Техподдержка")])[1]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    expect(page.locator(
+        '//span[contains(text(), "Информация носит справочный характер и не является публичной офертой.")]')).to_be_visible()
+    tags_nomera_mobile(page)
+    for i in range(1, 7):
+        expect(page.locator(f'(//div[contains(text(), "Подключить")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operator_beeline_ratesmobile_unikalny(page: Page):
+    page.goto('https://www.moskvaonline.ru/operatory/beeline/ratesmobile/unikalnye')
+    check_header_operator_page(page)
+    footer_mol(page)
+    header_mol(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "билайн")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Непубличные")])[1]')).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "+7  (800)  700-06-11")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Техподдержка")])[1]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    tags_for_operatory(page)
+    expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="eSIM")).to_be_visible()
+    expect(page.get_by_role("link", name="Семейные")).to_be_visible()
+    expect(page.get_by_role("link", name="Выгодные")).to_be_visible()
+    expect(page.get_by_role("link", name="Детские")).to_be_visible()
+    expect(page.get_by_role("link", name="Безлимитный интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Перейти со своим номером")).to_be_visible()
+    expect(page.get_by_role("link", name="Непубличные🔥")).to_be_visible()
+    expect(page.get_by_role("link", name="Для модема/роутера")).to_be_visible()
+    for i in range(1, 2):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
+
+
+def test_operator_beeline_ratesmobile__po_rossii(page: Page):
+    page.goto('https://www.moskvaonline.ru/operatory/beeline/ratesmobile/po-rossii')
+    check_header_operator_page(page)
+    footer_mol(page)
+    header_mol(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "билайн")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Связь по России")])')).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "+7  (800)  700-06-11")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Техподдержка")])[1]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    tags_for_operatory(page)
+    expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="eSIM")).to_be_visible()
+    expect(page.get_by_role("link", name="Семейные")).to_be_visible()
+    expect(page.get_by_role("link", name="Выгодные")).to_be_visible()
+    expect(page.get_by_role("link", name="Детские")).to_be_visible()
+    expect(page.get_by_role("link", name="Безлимитный интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Перейти со своим номером")).to_be_visible()
+    expect(page.get_by_role("link", name="Непубличные🔥")).to_be_visible()
+    expect(page.get_by_role("link", name="Для модема/роутера")).to_be_visible()
+    for i in range(1, 5):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+
+
+def test_operator_beeline_ratesmobile_perenos_nomera(page: Page):
+    page.goto('https://www.moskvaonline.ru/operatory/beeline/ratesmobile/perenos_nomera')
+    check_header_operator_page(page)
+    footer_mol(page)
+    header_mol(page)
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Мобильные операторы")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "билайн")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Тарифы")])[1]')).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "Перейти со своим номером")])[1]')).to_be_visible()
+    expect(page.locator('//img[@itemprop="contentUrl"]')).to_be_visible()
+    expect(page.locator("#operator_banner").get_by_text("Подключение")).to_be_visible()
+    expect(page.locator('(//a[contains(text(), "+7  (800)  700-06-11")])[1]')).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Техподдержка")])[1]')).to_be_visible()
+    expect(page.get_by_role("link", name="Об операторе")).to_be_visible()
+    expect(page.get_by_role("link", name="Тарифы").nth(1)).to_be_visible()
+    expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="в 1")).to_be_visible()
+    tags_for_operatory(page)
+    expect(page.get_by_role("link", name="Все", exact=True)).to_be_visible()
+    expect(page.get_by_role("link", name="eSIM")).to_be_visible()
+    expect(page.get_by_role("link", name="Семейные")).to_be_visible()
+    expect(page.get_by_role("link", name="Выгодные")).to_be_visible()
+    expect(page.get_by_role("link", name="Детские")).to_be_visible()
+    expect(page.get_by_role("link", name="Безлимитный интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Перейти со своим номером")).to_be_visible()
+    expect(page.get_by_role("link", name="Непубличные🔥")).to_be_visible()
+    expect(page.get_by_role("link", name="Для модема/роутера")).to_be_visible()
+    for i in range(1, 8):
+        expect(page.locator(f'(//div[contains(text(), "Выбрать")])[{i}]')).to_be_visible()
+    expect(page.locator('//h2[contains(text(), "Частые вопросы")]')).to_be_visible()
