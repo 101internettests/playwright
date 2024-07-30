@@ -138,16 +138,14 @@ def check_tariff_to_home(page: Page):
     page.locator('//*[@id="root"]/div/div[4]/div/div/div/div[2]/span').click()
 
 
-@allure.step("Проверка кнопки проверить покрытие на странице провайдеры")
-def check_button_coverage_providers(page: Page):
-    page.locator('(//div[@data-test="providers_provider_connect_button"])[1]').click()
-    expect(page.locator('(//input[@datatest="main_input_street_home_new"])[9]')).to_be_visible()
-    expect(page.locator('(//input[@datatest="main_input_street_home_new"])[10]')).to_be_visible()
-    page.locator('(//input[@aria-labelledby="label"])[13]').click()
-    expect(page.get_by_text("В квартиру").nth(3)).to_be_visible()
-    expect(page.get_by_text("В офис", exact=True).nth(2)).to_be_visible()
-    page.get_by_text("На дачу").nth(3).click()
-    expect(page.locator('[data-test="find_tohome_button_popup"]')).to_be_visible()
-    expect(page.get_by_text(
-        "Введите ваш адрес и сравните всех провайдеров своего дома в одной удобной таблице. В ней есть вся информация, необходимая для выбора провайдера: тарифы, сведения о прочих опциях, народный рейтинг провайдеров").nth(
-        1)).to_be_visible()
+@allure.step("Проверка кнопок сортировки на странице рейтинга")
+def check_sorting_rating(page: Page):
+    page.locator('//input[@datatest="raiting_input_filter_period"]').click()
+    expect(page.get_by_text("3 месяца")).to_be_visible()
+    expect(page.get_by_text("6 месяцев")).to_be_visible()
+    expect(page.get_by_text("За всё время")).to_be_visible()
+    page.get_by_text("12 месяцев").click()
+    page.locator('//input[@datatest="raiting_input_filter_internet_type"]').click()
+    expect(page.get_by_text("Мобильный доступ")).to_be_visible()
+    expect(page.locator('//li[contains(text(), "Интернет в офис")]')).to_be_visible()
+    page.get_by_text("Интернет в квартиру").click()

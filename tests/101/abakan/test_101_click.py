@@ -2,11 +2,11 @@ import pytest
 import allure
 from playwright.sync_api import Page, expect
 from pages.main_site_pages.main_page_click import check_header, check_footer, check_footer_rewievs, check_footer_blog, \
-    check_footer_career, check_top_footer, check_maim_page, check_tariff, check_tariff_to_home, \
-    check_button_coverage_providers
+    check_footer_career, check_top_footer, check_maim_page, check_tariff, check_tariff_to_home, check_sorting_rating
 from pages.main_site_pages.abakan_page_click import check_maim_page_top_providers, check_linking, check_faq, \
     check_faq_to_home, check_linking_to_home, check_top_providers_to_home, check_top_providers_providers, \
-    check_linking_providers, check_faq_providers, check_providers_block
+    check_linking_providers, check_faq_providers, check_providers_block, check_button_coverage_rating, \
+    check_button_coverage_providers, check_linking_rating, check_block_provider_rating
 
 
 @allure.step("Проверка хедера и футера в Абакане")
@@ -50,5 +50,13 @@ def test_page_providers(page: Page):
     expect(page.get_by_text("Проверить возможность подключения Ростелеком по адресу")).to_be_visible()
 
 
+@allure.step("Проверка страницы рейтинга в Абакане")
+def test_page_providers(page: Page):
+    page.goto('https://101internet.ru/abakan/rating')
+    check_sorting_rating(page)
+    check_linking_rating(page)
+    check_block_provider_rating(page)
+    check_button_coverage_rating(page)
+    expect(page.get_by_text("Проверить возможность подключения Ростелеком по адресу")).to_be_visible()
 
 

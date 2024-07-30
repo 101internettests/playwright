@@ -51,6 +51,12 @@ def check_linking_providers(page: Page):
     page.locator('(//a[@datatest="main_providers_button"])[1]').click()
 
 
+@allure.step("Проверка перелинковки на странице рейтинга")
+def check_linking_rating(page: Page):
+    page.get_by_role("link", name="Абакан", exact=True).click()
+    page.locator('(//a[@datatest="main_rating_button"])[1]').click()
+
+
 @allure.step("Проверка раздела ЧАВО на главной странице в Абакане")
 def check_faq(page: Page):
     page.locator('(//div[@class="container"]//span)[19]').click()
@@ -90,3 +96,42 @@ def check_providers_block(page: Page):
         page.locator(f'(//div[@datatest="providers_provider_button"])[{i}]').click()
         page.locator('(//a[@datatest="main_providers_button"])[1]').click()
 
+
+@allure.step("Проверка кнопки проверить покрытие на странице провайдеры")
+def check_button_coverage_providers(page: Page):
+    page.locator('(//div[@data-test="providers_provider_connect_button"])[1]').click()
+    expect(page.locator('(//input[@datatest="main_input_street_home_new"])[9]')).to_be_visible()
+    expect(page.locator('(//input[@datatest="main_input_street_home_new"])[10]')).to_be_visible()
+    page.locator('(//input[@aria-labelledby="label"])[13]').click()
+    expect(page.get_by_text("В квартиру").nth(3)).to_be_visible()
+    expect(page.get_by_text("В офис", exact=True).nth(2)).to_be_visible()
+    page.get_by_text("На дачу").nth(3).click()
+    expect(page.locator('[data-test="find_tohome_button_popup"]')).to_be_visible()
+    expect(page.get_by_text(
+        "Введите ваш адрес и сравните всех провайдеров своего дома в одной удобной таблице. В ней есть вся информация, необходимая для выбора провайдера: тарифы, сведения о прочих опциях, народный рейтинг провайдеров").nth(
+        1)).to_be_visible()
+
+
+@allure.step("Проверка кнопки проверить покрытие на странице рейтинга")
+def check_button_coverage_rating(page: Page):
+    page.locator('//a[@datatest="raiting_connect_button"]').click()
+    expect(page.locator('(//input[@datatest="main_input_street_home_new"])[5]')).to_be_visible()
+    expect(page.locator('(//input[@datatest="main_input_street_home_new"])[6]')).to_be_visible()
+    page.locator('(//input[@aria-labelledby="label"])[11]').click()
+    expect(page.get_by_text("В квартиру").nth(3)).to_be_visible()
+    expect(page.get_by_text("В офис", exact=True).nth(2)).to_be_visible()
+    page.get_by_text("На дачу").nth(3).click()
+    expect(page.locator('[data-test="find_tohome_button_popup"]')).to_be_visible()
+    expect(page.get_by_text(
+        "Введите ваш адрес и сравните всех провайдеров своего дома в одной удобной таблице. В ней есть вся информация, необходимая для выбора провайдера: тарифы, сведения о прочих опциях, народный рейтинг провайдеров").nth(
+        1)).to_be_visible()
+
+
+@allure.step("Проверка блока с провайдером на странице рейтинга")
+def check_block_provider_rating(page: Page):
+    page.get_by_role("link", name="Ростелеком").nth(1).click()
+    page.locator('(//a[@datatest="main_rating_button"])[1]').click()
+    page.get_by_role("link", name="отзывов").click()
+    page.locator('(//a[@datatest="main_rating_button"])[1]').click()
+    page.get_by_role("link", name="Все тарифы (26)").click()
+    page.locator('(//a[@datatest="main_rating_button"])[1]').click()
