@@ -34,3 +34,13 @@ def check_tags(page: Page):
     expect(page.locator('(//a[@href="/balashiha/rates/internet-300-mbit"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/balashiha/rates/internet-500-mbit"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/balashiha/rates/online-kinoteatr"])[1]')).to_be_visible()
+
+
+def page_nomera(page: Page):
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.locator('//span[contains(text(), "Тарифы сотовой связи")]')).to_be_visible()
+    expect(page.get_by_text("КОНСТРУКТОР (new!)")).to_be_visible()
+    expect(page.get_by_text("СПИСОК ТАРИФОВ")).to_be_visible()
+    expect(page.locator('//div[contains(text(), "Сортировка")]')).to_be_visible()
+    expect(page.locator('//input[@value="Сначала популярные "]')).to_be_visible()
+    expect(page.locator('(//h1)[1]')).to_be_visible()
