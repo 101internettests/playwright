@@ -21,12 +21,5 @@ def check_linking(page: Page):
 
 @allure.step("Проверка раздела ЧАВО на главной странице в Абакане")
 def check_faq(page: Page):
-    page.locator('(//div[@class="container"]//span)[19]').click()
-    page.locator('(//div[@class="container"]//span)[20]').click()
-    page.locator('(//div[@class="container"]//span)[21]').click()
-    page.locator('(//div[@class="container"]//span)[22]').click()
-    page.locator('(//div[@class="container"]//span)[23]').click()
-    page.locator('(//div[@class="container"]//span)[24]').click()
-    page.locator('(//div[@class="container"]//span)[25]').click()
-    page.locator('(//div[@class="container"]//span)[26]').click()
-    page.locator('(//div[@class="container"]//span)[27]').click()
+    for i in range(19, 27):
+        expect(page.locator(f'(//div[@class="container"]//span)[{i}]')).to_be_visible()
