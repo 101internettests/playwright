@@ -149,3 +149,82 @@ def check_sorting_rating(page: Page):
     expect(page.get_by_text("Мобильный доступ")).to_be_visible()
     expect(page.locator('//li[contains(text(), "Интернет в офис")]')).to_be_visible()
     page.get_by_text("Интернет в квартиру").click()
+
+
+@allure.step("Проверка тегов на странице тарифов")
+def check_tags_rates(page: Page):
+    page.get_by_role("heading", name="Тарифы на домашний интернет в Абакане").click()
+    page.get_by_role("link", name="интернет+тв+мобильная связь", exact=True).click()
+    page.get_by_role("link", name="домашний интернет", exact=True).click()
+    page.get_by_role("link", name="интернет+тв", exact=True).click()
+    page.get_by_role("link", name="дешевый интернет").click()
+    page.get_by_role("link", name="100 мб/с").click()
+    page.get_by_role("link", name="300 мб/с").click()
+    page.get_by_role("link", name="500 мб/с").click()
+    page.get_by_role("link", name="онлайн-кинотеатр", exact=True).click()
+    page.get_by_role("link", name="Все", exact=True).click()
+    page.get_by_role("link", name="Белгород", exact=True).click()
+    page.get_by_role("link", name=" Белгород").click()
+    page.get_by_role("link", name="Владимир", exact=True).click()
+    page.get_by_role("link", name=" Владимир").click()
+    page.get_by_role("link", name="Астрахань").click()
+    page.get_by_text("Астрахань+7 (800) 302-32-76БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ Войти").click()
+    page.get_by_role("link", name=" Астрахань").click()
+    page.get_by_role("link", name="Санкт-Петербург").click()
+    page.get_by_role("link", name=" Санкт-Петербург").click()
+    page.get_by_role("link", name="Москва").click()
+
+
+@allure.step("Проверка страницы выбора региона")
+def check_select_region(page: Page):
+    page.get_by_role("link", name="Белгород", exact=True).click()
+    page.locator('(//span[contains(text(), "Белгород")])[1]').click()
+    page.get_by_role("link", name="Владимир", exact=True).click()
+    page.locator('(//span[contains(text(), "Владимир")])[1]').click()
+    page.get_by_role("link", name="Астрахань").click()
+    page.locator('(//span[contains(text(), "Астрахань")])[1]').click()
+    page.get_by_role("link", name="Санкт-Петербург").click()
+    page.locator('(//span[contains(text(), "Санкт-Петербург")])[1]').click()
+    page.get_by_role("link", name="Москва").click()
+
+
+@allure.step("Проверка фильтров на странице отзывов")
+def check_sorting_review(page: Page):
+    page.locator('//input[@datatest="reviews_input_filter_provider"]').click()
+    page.locator('//div[contains(text(), "2КОМ")]').click()
+    page.locator('//input[@datatest="reviews_input-filter_reviews"]').click()
+    expect(page.locator('//li[contains(text(), "Нейтральный")]')).to_be_visible()
+    expect(page.locator('//li[contains(text(), "Негативный")]')).to_be_visible()
+    page.locator('//li[contains(text(), "Положительный")]').click()
+    page.locator('//input[@datatest="reviews_input_filter_service"]').click()
+    expect(page.locator('//li[contains(text(), "Интернет в загородный дом")]')).to_be_visible()
+    expect(page.locator('//li[contains(text(), "Интернет в офис")]')).to_be_visible()
+    expect(page.locator('//li[contains(text(), "Мобильный доступ")]')).to_be_visible()
+    page.locator('//li[contains(text(), "Интернет в квартиру ")]').click()
+    page.locator('//input[@name="sort_reviews"]').click()
+    expect(page.locator('//li[contains(text(), "Сначала старые отзывы")]')).to_be_visible()
+    page.locator('//li[contains(text(), "Сначала новые отзывы")]').click()
+    page.locator('(// a[contains(text(), "оставить отзыв")])[2]').click()
+    page.locator('(//div[@class="container"]//span)[1]').click()
+
+
+
+@allure.step("Проверка пангинации на странице отзывов")
+def check_pangination_review(page: Page):
+    for i in range(1, 6):
+        page.locator(f'(//a[@aria-label="Переключить страницу"])[{i}]').click()
+        expect(page.locator('(// a[contains(text(), "оставить отзыв")])[2]')).to_be_visible()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
