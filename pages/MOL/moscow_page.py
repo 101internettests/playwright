@@ -42,3 +42,17 @@ def operatory_mts_main(page: Page):
     expect(page.get_by_role("link", name="Номера")).to_be_visible()
     expect(page.get_by_role("link", name="акции", exact=True)).to_be_visible()
     expect(page.get_by_role("link", name="в 1")).to_be_visible()
+
+
+def provider_megafone(page: Page):
+    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
+    expect(page.get_by_role("link", name="Провайдеры Москвы")).to_be_visible()
+    expect(page.locator('(//span[contains(text(), "МегаФон")])[1]')).to_be_visible()
+    expect(page.locator('//img[@alt="Лого провайдера"]')).to_be_visible()
+    expect(page.get_by_text("Проверить доступность МегаФон по адресу")).to_be_visible()
+    expect(page.locator("#provider_banner").get_by_text("Подключение")).to_be_visible()
+    expect(page.get_by_role("link", name="+7 (495) 106-87-57")).to_be_visible()
+    expect(page.locator("#provider_banner").get_by_text("Техподдержка")).to_be_visible()
+    expect(page.get_by_role("link", name="+7 (800) 550-05-00")).to_be_visible()
+    expect(page.locator('(//div[contains(text(), "Оставить заявку")])[1]')).to_be_visible()
+    expect(page.get_by_role("link", name="О провайдере")).to_be_visible()

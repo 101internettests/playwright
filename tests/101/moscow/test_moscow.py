@@ -2,7 +2,7 @@ from playwright.sync_api import Page, expect
 from pages.main_page import check_header, search_tariffs, one_click_form, tariffs_block, blue_form, feedback_page, sorting_providers_rates, contact_feedback, contact_page, tags_mobile, tags_for_operatory
 from pages.main_page import check_footer, blue_form_second, search_tariffs_second, sorting, page_internet_in_office, ooops_stub, terms_of_use, personal_data, check_header_operator_page, rating_page
 from pages.main_site_pages.moscow_page import check_header_moscow, check_tags, check_provider_rostel_tags, check_provider_onlime_tags
-from pages.MOL.moscow_page import operatory_mts_main
+from pages.MOL.moscow_page import operatory_mts_main, provider_megafone
 
 def test_reviews_page(page: Page):
     page.goto('https://101internet.ru/moskva/reviews')
@@ -913,22 +913,10 @@ def test_provider_megafon(page: Page):
     check_header(page)
     check_footer(page)
     check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Провайдеры Москвы")).to_be_visible()
-    expect(page.locator('(//span[contains(text(), "МегаФон")])[1]')).to_be_visible()
+    provider_megafone(page)
     expect(page.get_by_role("heading", name="Домашний интернет от провайдера МегаФон в Москве")).to_be_visible()
-    expect(page.locator('//img[@alt="Лого провайдера"]')).to_be_visible()
-    expect(page.get_by_text("Проверить доступность МегаФон по адресу")).to_be_visible()
-    expect(page.locator("#provider_banner").get_by_text("Подключение")).to_be_visible()
-    expect(page.get_by_role("link", name="+7 (495) 106-87-57")).to_be_visible()
-    expect(page.locator("#provider_banner").get_by_text("Техподдержка")).to_be_visible()
-    expect(page.get_by_role("link", name="+7 (800) 550-05-00")).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "Оставить заявку")])[1]')).to_be_visible()
-    expect(page.get_by_role("link", name="О провайдере")).to_be_visible()
-    # expect(page.locator('(//a[contains(text(), "Отзывы")])[1]')).to_be_visible()
-    # expect(page.get_by_role("link", name="акции")).to_be_visible()
+    provider_megafone(page)
     search_tariffs(page)
-    expect(page.locator('(//div[contains(text(), "Тарифы")])[1]')).to_be_visible()
     for i in range(2, 6):
         expect(page.locator(f'(//span[contains(text(), "Подключить")])[{i}]')).to_be_visible()
     expect(page.locator('(//div[contains(text(), "Оставить заявку")])[2]')).to_be_visible()
@@ -947,20 +935,10 @@ def test_provider_megafon_rates(page: Page):
     check_header(page)
     check_footer(page)
     check_header_moscow(page)
-    expect(page.get_by_role("link", name="Подключить интернет")).to_be_visible()
-    expect(page.get_by_role("link", name="Провайдеры Москвы")).to_be_visible()
-    expect(page.locator('//span[contains(text(), "МегаФон")]')).to_be_visible()
     expect(page.locator('//span[contains(text(), "Тарифы")]')).to_be_visible()
     expect(page.get_by_role("heading", name="Тарифные планы интернет-провайдера МегаФон в Москве")).to_be_visible()
-    expect(page.locator('//img[@alt="Лого провайдера"]')).to_be_visible()
-    expect(page.get_by_text("Проверить доступность МегаФон по адресу")).to_be_visible()
-    expect(page.locator("#provider_banner").get_by_text("Подключение")).to_be_visible()
-    expect(page.get_by_role("link", name="+7 (495) 106-87-57")).to_be_visible()
-    expect(page.locator("#provider_banner").get_by_text("Техподдержка")).to_be_visible()
-    expect(page.get_by_role("link", name="+7 (800) 550-05-00")).to_be_visible()
-    expect(page.locator('(//div[contains(text(), "Оставить заявку")])[1]')).to_be_visible()
+    provider_megafone(page)
     search_tariffs(page)
-    expect(page.get_by_role("link", name="О провайдере")).to_be_visible()
     expect(page.locator('(//div[contains(text(), "Тарифы")])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/moskva/rates/internet-i-mobilnaya-svyaz"])[1]')).to_be_visible()
     expect(page.locator('(//a[@href="/moskva/rates/internet-tv-mobile"])[1]')).to_be_visible()
